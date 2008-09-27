@@ -1,0 +1,18 @@
+0.3.0 - Apr 30, 2008
+Mostly bug fixes, a few new features.
+
+== Features added ==
+* Language support. You now can define and query the language, in which you
+  want to query data from the World of Warcraft armory.
+* Region support. You now can define a regions' armory to query data from it.
+  This is especially helpful, if querying character data from different
+  regions (e.g. US and EU characters).
+
+== Bugs Squashed ==
+* The xmlToArray method was not properly checking, if children of the XML
+  objects are proper arrays.
+* Caching XML data retrieved from the World of Warcraft armory works again.
+* MySQL query results will now be stored correct. The cacheSave() method was
+  not checking, if an XML result was already stored in the database, and thus
+  produced a duplicate key error. Now existing XML results will be updated
+  instead of inserted.
