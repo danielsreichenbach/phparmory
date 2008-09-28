@@ -126,6 +126,9 @@ class phpArmory {
 	*/
 	function phpArmory($armory = NULL, $retries = NULL){
 	
+        if (!extension_loaded('curl') && !extension_loaded('xml')) {
+            exit ("Unable to instatiate phparmory: curl or xml extension missing.");
+        }
 		if ($armory){
 			$this->armory = $armory;
 		}

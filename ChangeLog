@@ -1,3 +1,15 @@
+0.3.2 - ??? ??, 2008
+A pure bugfix release.
+
+== Bugs squashed ==
+* phpArmory.class.php: Class will not be instantiated if the Curl or XML
+  extension is missing from your PHP installation.
+* examples/character.php: Updated to use setArea. Properly dumps character
+  data as XML. Please note that characterFetch() will now return the armory
+  patchlevel, too.
+* examples/guildroster.php: Updated to use setArea. Properly dumps the full
+  guild roster as plain table.
+
 0.3.1 - Sep 28, 2008
 A few features have been revised, a few new ones added.
 
