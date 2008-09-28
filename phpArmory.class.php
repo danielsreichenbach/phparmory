@@ -158,10 +158,10 @@ class phpArmory {
 
 		if($this->area == 'eu') {
 			$patchnotes=$this->xmlFetch($this->wow."en/patchnotes/",NULL,5);
-			if(!preg_match('@<h3 .+>Patch ([0-9\.]+)</h3>@',$patchnotes,$matches)) report("cannot find currenty armory patchlevel!","ERROR");
+			if(!preg_match('@<h3 .+>Patch ([0-9\.]+)</h3>@',$patchnotes,$matches)) return sprintf("%02d%02d%02d",$major,$minor,$patch);
 		} else {
 			$patchnotes=$this->xmlFetch($this->wow."patchnotes/",NULL,5);
-			if(!preg_match('@<a href="/patchnotes/">Patch ([0-9\.]+)</a>@',$patchnotes,$matches)) report("cannot find currenty armory patchlevel!","ERROR");
+			if(!preg_match('@<a href="/patchnotes/">Patch ([0-9\.]+)</a>@',$patchnotes,$matches)) return sprintf("%02d%02d%02d",$major,$minor,$patch);
 		}
 		
 		list($major,$minor,$patch)=explode(".",$matches[1]);
@@ -192,7 +192,7 @@ class phpArmory {
 		$realm = ucfirst($realm);
 		$character = ucfirst($character);
 
-		report("Getting data for character: $character realm: $realm from ".strtoupper($this->area)." armory.");
+		// report("Getting data for character: $character realm: $realm from ".strtoupper($this->area)." armory.");
 
 		$urlbase = $this->armory."character-";
 		$urlend = ".xml?r=".urlencode($realm)."&n=".urlencode($character);
@@ -213,7 +213,7 @@ class phpArmory {
 
 	function TalentDefinitionFetch(){
 		$classes=array("warrior","paladin","hunter","rogue","priest","shaman","mage","warlock","druid");
-		report("getting talent definitions from web!","DEBUG");
+		// report("getting talent definitions from web!","DEBUG");
 
 		foreach($classes as $class) {
 			$class=strtolower($class);
@@ -354,11 +354,11 @@ class phpArmory {
 			for($i=1;$i<=$this->retries;$i++) {
 				if(time() < $this->lastdownload+1) {
 					$delay=rand(1,2);
-					report("...inserting delay of ".$delay." seconds.");
+					// report("...inserting delay of ".$delay." seconds.");
 					sleep($delay);	//random delay
 				}
 	
-				report("Try $i: downloading from URL: ".$url);
+				// report("Try $i: downloading from URL: ".$url);
 				$ch = curl_init();
 				$timeout = $this->timeout;
 						
@@ -375,21 +375,21 @@ class phpArmory {
 	
 				$f = curl_exec($ch);
 				$this->lastdownload=time();
-				//report("content:".$f."\n\n");
+				// report("content:".$f."\n\n");
 				curl_close($ch);
 
-				if(strpos($f,'errCode="noCharacter"')) report("Character not found on armory, check spelling and area settings!","ERROR");
-				if(strpos($f,'errorhtml') AND $i<=$this->retries-1) report("Armory send an error page, retrying...");
+				if(strpos($f,'errCode="noCharacter"')) return ("Character not found on armory, check spelling and area settings!");
+				if(strpos($f,'errorhtml') AND $i<=$this->retries-1) return("Armory send an error page, retrying...");
 				else {
 					if(strlen($f) AND $i<=$this->retries-1) break;
-						else report("No data, retrying...");
+						else return("No data, retrying...");
 				}
 			}
 		
 		} else {
-			report("your php installation is lacking CURL support, cannot download!","ERROR");
+			return("your php installation is lacking CURL support, cannot download!");
 		}
-		if(strlen($f)<100) report("Download failed, giving up! Server response: ".$f,"ERROR");
+		if(strlen($f)<100) return("Download failed, giving up! Server response: ".$f);
 		
 		return $f;
 	

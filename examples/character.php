@@ -38,14 +38,17 @@
  * 
  */
  
-$charName = "Phattangent";
-$realmName = "Kul Tiras";
+$charName = "Jagoo";
+$realmName = "Madmortem";
+$areaName = "eu";
 
 // Include the phpArmory class library
 include('../phpArmory.class.php');
 
 // Instantiate the class library
 $armory = new phpArmory();
+
+$armory->setArea($areaName);
 
 // Fetch character information
 $char = $armory->characterFetch($charName, $realmName);

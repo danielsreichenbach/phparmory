@@ -38,14 +38,17 @@
  * 
  */
 
-$guildName = "Knights of Chaos";
-$realmName = "Kul Tiras";
+$guildName = "Divinitas";
+$realmName = "Madmortem";
+$areaName = "eu";
 
 // Include the phpArmory class library
 include('../phpArmory.class.php');
 
 // Instantiate the class library
 $armory = new phpArmory();
+
+$armory->setArea($areaName);
 
 // Fetch guild information
 $guild = $armory->guildFetch($guildName, $realmName);

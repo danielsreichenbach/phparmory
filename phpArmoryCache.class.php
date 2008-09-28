@@ -65,14 +65,12 @@ class phpArmoryCache extends phpArmory {
      */
     var $dataTable = "armory_cache";
 
-    /**
-     * The time between cache updates in seconds
-     *
-     * @todo Make the interval able to be set for each thing (ie. update items once a week, update guilds once a day, etc..)
-     *
-     * @var integer
-     */
-    var $updateInterval = 14400;
+	/**
+	 * Number of retries for downloading
+	 *
+	 * @var integer
+	 */
+	var $retries = 5;
 
     /**
      * Internal cache id of the current item
@@ -96,9 +94,15 @@ class phpArmoryCache extends phpArmory {
     * @param string     $dataStore      "flat" or "mysql"
     * @param string     $dataConn       e.g. "mysql://username:password@localhost/database"
     * @param string     $dataTable      Name of the database table to use
-    * @param integer    $updateInterval Time (in seconds) between cache updates
+    * @param integer    $retries        Time (in seconds) between cache updates
     */
-    function phpArmoryCache($armory = NULL, $dataStore = NULL, $dataConn = NULL, $dataTable = NULL, $updateInterval = NULL) {
+    function phpArmoryCache($armory = NULL, $dataStore = NULL, $dataConn = NULL, $dataTable = NULL, $retries = NULL) {
+        
+        if(($retries==NULL)&&($this->retries)){
+            $retries = $this->retries;
+        } else {
+            $this->retries = $retries;
+        }
         
         if(($dataStore==NULL)&&($this->dataStore)){
             $dataStore = $this->dataStore;
