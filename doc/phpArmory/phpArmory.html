@@ -26,7 +26,7 @@
 <p class="short-description">phpArmory Class</p>
 <p class="description"><p>A class library to fetch and unserialize XML data from the World of Warcraft Armory website.</p></p>
 		<p class="notes">
-			Located in <a class="field" href="_phpArmory.class.php.html">/phpArmory.class.php</a> (line <span class="field">43</span>)
+			Located in <a class="field" href="_phpArmory.class.php.html">/phpArmory.class.php</a> (line <span class="field">42</span>)
 		</p>
 		
 				
@@ -75,7 +75,11 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																								<div class="var-title">
+																																																																																																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$area" title="details" class="var-name">$area</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$armory" title="details" class="var-name">$armory</a>
 				</div>
@@ -88,12 +92,16 @@
 					<a href="#$guild" title="details" class="var-name">$guild</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">string</span>
-					<a href="#$language" title="details" class="var-name">$language</a>
+					<span class="var-type">integer</span>
+					<a href="#$lastdownload" title="details" class="var-name">$lastdownload</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$realm" title="details" class="var-name">$realm</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$retries" title="details" class="var-name">$retries</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">integer</span>
@@ -102,6 +110,10 @@
 																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$userAgent" title="details" class="var-name">$userAgent</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$wow" title="details" class="var-name">$wow</a>
 				</div>
 											</div>
 		</div>
@@ -124,7 +136,7 @@
 												<div class="method-definition">
 											<span class="method-result">phpArmory</span>
 										<a href="#phpArmory" title="details" class="method-name">phpArmory</a>
-											([<span class="var-type">string</span>&nbsp;<span class="var-name">$armory</span> = <span class="var-default">NULL</span>])
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$armory</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$retries</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">string[]</span>
@@ -138,7 +150,7 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#getLanguage" title="details" class="method-name">getLanguage</a>
+										<a href="#getCurrentPatchlevel" title="details" class="method-name">getCurrentPatchlevel</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -152,19 +164,19 @@
 											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$itemID</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">string</span>
-										<a href="#itemIconURL" title="details" class="method-name">itemIconURL</a>
-											(<span class="var-type">string[]</span>&nbsp;<span class="var-name">$itemRef</span>, <span class="var-type">string[]</span>&nbsp;<span class="var-name">1</span>, <span class="var-type">string[]</span>&nbsp;<span class="var-name">2</span>)
-									</div>
-																<div class="method-definition">
 											<span class="method-result">string[]</span>
 										<a href="#itemNameFetch" title="details" class="method-name">itemNameFetch</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$item</span>, [<span class="var-type">string[]</span>&nbsp;<span class="var-name">$filter</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#setlang" title="details" class="method-name">setlang</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$language</span>)
+										<a href="#setarea" title="details" class="method-name">setarea</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$l</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#TalentDefinitionFetch" title="details" class="method-name">TalentDefinitionFetch</a>
+										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -194,14 +206,33 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$armory" id="$armory"><!-- --></A>
+			<a name="var$area" id="$area"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
+			<span class="var-name">$area</span>
+			 = <span class="var-default"> &quot;us&quot;</span>			(line <span class="line-number">63</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The armory area to send requests to</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$armory" id="$armory"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
 			<span class="var-name">$armory</span>
-			 = <span class="var-default"> &quot;http://www.wowarmory.com/&quot;</span>			(line <span class="line-number">50</span>)
+			 = <span class="var-default"> &quot;http://www.wowarmory.com/&quot;</span>			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -214,13 +245,13 @@
 
 </div>
 <a name="var$character" id="$character"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$character</span>
-			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">71</span>)
+			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">84</span>)
 		</span>
 	</div>
 
@@ -233,13 +264,13 @@
 
 </div>
 <a name="var$guild" id="$guild"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$guild</span>
-			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">64</span>)
+			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">77</span>)
 		</span>
 	</div>
 
@@ -251,19 +282,19 @@
 		
 
 </div>
-<a name="var$language" id="$language"><!-- --></A>
-<div class="oddrow">
+<a name="var$lastdownload" id="$lastdownload"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">string</span>
-			<span class="var-name">$language</span>
-			 = <span class="var-default"> &quot;en&quot;</span>			(line <span class="line-number">78</span>)
+			<span class="var-type">integer</span>
+			<span class="var-name">$lastdownload</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">107</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The default language in which items will be fetched</p>
+<p class="short-description">Time of last download, used to insert a random delay to prevent armorys weird behaviour</p>
 	
 	
 		
@@ -271,13 +302,13 @@
 
 </div>
 <a name="var$realm" id="$realm"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$realm</span>
-			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">57</span>)
+			 = <span class="var-default"> FALSE</span>			(line <span class="line-number">70</span>)
 		</span>
 	</div>
 
@@ -289,6 +320,33 @@
 		
 
 </div>
+<a name="var$retries" id="$retries"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$retries</span>
+			 = <span class="var-default"> 5</span>			(line <span class="line-number">114</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Number of retries for downloading</p>
+	
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../phpArmory/phpArmoryCache.html#var$retries">phpArmoryCache::$retries</a>
+								: Number of retries for downloading
+							</li>
+				</ul>
+		
+
+</div>
 <a name="var$timeout" id="$timeout"><!-- --></A>
 <div class="oddrow">
 
@@ -296,7 +354,7 @@
 		<span class="var-title">
 			<span class="var-type">integer</span>
 			<span class="var-name">$timeout</span>
-			 = <span class="var-default"> 30</span>			(line <span class="line-number">94</span>)
+			 = <span class="var-default"> 5</span>			(line <span class="line-number">100</span>)
 		</span>
 	</div>
 
@@ -315,12 +373,31 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$userAgent</span>
-			 = <span class="var-default"> &quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1&quot;</span>			(line <span class="line-number">85</span>)
+			 = <span class="var-default"> &quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11&quot;</span>			(line <span class="line-number">91</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The default user agent for making HTTP requests</p>
+	
+	
+		
+		
+
+</div>
+<a name="var$wow" id="$wow"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$wow</span>
+			 = <span class="var-default"> &quot;http://www.worldofwarcraft.com/&quot;</span>			(line <span class="line-number">56</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The URL of the WoW website</p>
 	
 	
 		
@@ -345,10 +422,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodphpArmory" id="phpArmory"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor phpArmory</span> (line <span class="line-number">107</span>)
+		<span class="method-title">Constructor phpArmory</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -360,22 +437,25 @@
 		<span class="method-name">
 			phpArmory
 		</span>
-					([<span class="var-type">string</span>&nbsp;<span class="var-name">$armory</span> = <span class="var-default">NULL</span>])
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$armory</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$retries</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$armory</span><span class="var-description">: URL of the Armory website</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$retries</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodcharacterFetch" id="characterFetch"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">characterFetch</span> (line <span class="line-number">169</span>)
+		<span class="method-title">characterFetch</span> (line <span class="line-number">191</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -413,10 +493,10 @@
 				</ul>
 	</div>
 <a name="methodcharacterIconURL" id="characterIconURL"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">characterIconURL</span> (line <span class="line-number">198</span>)
+		<span class="method-title">characterIconURL</span> (line <span class="line-number">240</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -443,11 +523,11 @@
 		
 			
 	</div>
-<a name="methodgetLanguage" id="getLanguage"><!-- --></a>
-<div class="evenrow">
+<a name="methodgetCurrentPatchlevel" id="getCurrentPatchlevel"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getLanguage</span> (line <span class="line-number">148</span>)
+		<span class="method-title">getCurrentPatchlevel</span> (line <span class="line-number">157</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -455,7 +535,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			getLanguage
+			getCurrentPatchlevel
 		</span>
 				()
 			</div>
@@ -464,10 +544,10 @@
 			
 	</div>
 <a name="methodguildFetch" id="guildFetch"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">guildFetch</span> (line <span class="line-number">222</span>)
+		<span class="method-title">guildFetch</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -505,10 +585,10 @@
 				</ul>
 	</div>
 <a name="methoditemFetch" id="itemFetch"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">itemFetch</span> (line <span class="line-number">242</span>)
+		<span class="method-title">itemFetch</span> (line <span class="line-number">284</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -542,48 +622,11 @@
 							</li>
 				</ul>
 	</div>
-<a name="methoditemIconURL" id="itemIconURL"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">itemIconURL</span> (line <span class="line-number">314</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">itemIconURL</p>
-<p class="description"><p>This function returns the url of a icon  for an item from a character sheet from the armory</p></p>
-	<ul class="tags">
-				<li><span class="field">return:</span> The URL of the icon</li>
-				<li><span class="field">author:</span> Tony Gritton &lt;<a href="mailto:sonjeir@bellsouth.net">sonjeir@bellsouth.net</a>&gt;</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			itemIconURL
-		</span>
-					(<span class="var-type">string[]</span>&nbsp;<span class="var-name">$itemRef</span>, <span class="var-type">string[]</span>&nbsp;<span class="var-name">1</span>, <span class="var-type">string[]</span>&nbsp;<span class="var-name">2</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string[]</span>
-				<span class="var-name">$itemRef</span><span class="var-description">: The item icon ref from the character or item info array.</span>			</li>
-					<li>
-				<span class="var-type">string[]</span>
-				<span class="var-name">1</span><span class="var-description">: example         $itemRef = $char['characterinfo']['charactertab']['items']['item']['0']['icon'];</span>			</li>
-					<li>
-				<span class="var-type">string[]</span>
-				<span class="var-name">2</span><span class="var-description">: example         $itemRef = $item['itemtooltips']['itemtooltip']['icon'];</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methoditemNameFetch" id="itemNameFetch"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">itemNameFetch</span> (line <span class="line-number">263</span>)
+		<span class="method-title">itemNameFetch</span> (line <span class="line-number">305</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -622,11 +665,11 @@
 							</li>
 				</ul>
 	</div>
-<a name="methodsetlang" id="setlang"><!-- --></a>
+<a name="methodsetarea" id="setarea"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setlang</span> (line <span class="line-number">122</span>)
+		<span class="method-title">setarea</span> (line <span class="line-number">140</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -634,24 +677,44 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			setlang
+			setarea
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$language</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$l</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">$language</span>			</li>
+				<span class="var-name">$l</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="methodxmlFetch" id="xmlFetch"><!-- --></a>
+<a name="methodTalentDefinitionFetch" id="TalentDefinitionFetch"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">xmlFetch</span> (line <span class="line-number">337</span>)
+		<span class="method-title">TalentDefinitionFetch</span> (line <span class="line-number">217</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			TalentDefinitionFetch
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodxmlFetch" id="xmlFetch"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">xmlFetch</span> (line <span class="line-number">350</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -692,10 +755,10 @@
 				</ul>
 	</div>
 <a name="methodxmlToArray" id="xmlToArray"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">xmlToArray</span> (line <span class="line-number">380</span>)
+		<span class="method-title">xmlToArray</span> (line <span class="line-number">413</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -734,7 +797,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 07 May 2008 12:48:17 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+		Documentation generated on Sun, 28 Sep 2008 18:25:34 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
 	</p>
 	</div></body>
 </html>
