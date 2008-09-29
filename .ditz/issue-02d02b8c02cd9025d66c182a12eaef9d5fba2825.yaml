@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Arena teams
+desc: Add functions to fetch arena data from the armory.
+type: :feature
+component: phpArmory class
+release: phpArmory 0.4.0
+reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-09-29 10:31:15.375542 Z
+references: []
+
+id: 02d02b8c02cd9025d66c182a12eaef9d5fba2825
+log_events: 
+- - 2008-09-29 10:31:18.291698 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - created
+  - ""
+- - 2008-09-29 10:35:01.274101 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - assigned to release phpArmory 0.4.0 from unassigned
+  - ""

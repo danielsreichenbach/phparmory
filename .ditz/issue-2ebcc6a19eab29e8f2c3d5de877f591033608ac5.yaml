@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Extend class documentation
+desc: |-
+  The current phpDoc class documentation needs a review, in order to sync the
+  documentation with the current class features.
+type: :task
+component: Documentation
+release: phpArmory 0.4.0
+reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-09-29 10:32:08.320548 Z
+references: []
+
+id: 2ebcc6a19eab29e8f2c3d5de877f591033608ac5
+log_events: 
+- - 2008-09-29 10:32:10.825242 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - created
+  - ""
+- - 2008-09-29 10:34:42.377783 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - assigned to release phpArmory 0.4.0 from unassigned
+  - ""
