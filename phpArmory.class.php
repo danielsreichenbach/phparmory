@@ -137,7 +137,7 @@ class phpArmory {
 		}
 	}
 
-	function setarea($l) {
+	function setArea($l) {
 		switch($l)
 		{
 			case 'eu':
