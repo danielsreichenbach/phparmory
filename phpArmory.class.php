@@ -89,6 +89,7 @@ class phpArmory {
 	 * @var string
 	 */
 	var $userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11";
+	// var $userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092510 Firefox/3.0.3";
 	
 	/**
 	 * The amounto of time in senconds after which to consider
