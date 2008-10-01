@@ -57,35 +57,42 @@ class phpArmory5 {
 	 * @access      private     
 	 * @var         string      Contains the area / region to be used.
 	 */
-	private var $area = "us";
+	private var $areaName = "us";
+	
+	/**
+	 * The locale used to send requests.
+	 * @access      private     
+	 * @var         string      Contains the locale used to send requests.
+	 */
+	private var $localeName = "en";
 	
 	/**
 	 * The case sensitive name of a realm.
 	 * @access      private     
 	 * @var         string      Contains the case sensitive name of a realm.
 	 */
-	private var $realm = FALSE;
+	private var $realmName = FALSE;
 	
 	/**
 	 * The case sensitive name of a arena team.
 	 * @access      private     
 	 * @var         string      Contains the case sensitive name of a arena team.
 	 */
-	private var $arenateam = FALSE;
+	private var $arenaTeam = FALSE;
 	
 	/**
 	 * The case sensitive name of a guild.
 	 * @access      private     
 	 * @var         string      Contains the case sensitive name of a guild.
 	 */
-	private var $guild = FALSE;
+	private var $guildName = FALSE;
 	
 	/**
 	 * The case sensitive name of a character.
 	 * @access      private     
 	 * @var         string      Contains the case sensitive name of a character.
 	 */
-	private var $character = FALSE;
+	private var $characterName = FALSE;
 	
 	/**
 	 * The default user agent for making HTTP requests.
@@ -101,7 +108,7 @@ class phpArmory5 {
 	 * @access      private     
 	 * @var         integer
 	 */
-	private var $timeout = 5;
+	private var $timeOut = 5;
 
 	/**
 	 * Time of last download, used to insert a random delay to prevent armorys'
@@ -109,26 +116,132 @@ class phpArmory5 {
 	 * @access      private     
 	 * @var         integer
 	 */
-	private var $lastdownload = 0;
+	private var $lastDownload = 0;
 
 	/**
 	 * Number of retries for downloading data.
 	 * @access      private     
 	 * @var         integer
 	 */
-	private var $retries = 5;
+	private var $downloadRetries = 5;
 
     /**
      * phpArmory5 class constructor.
+     * @access      public
      */
-    public function __construct() {
+    public function __construct($areaName = NULL, $downloadRetries = NULL) {
         
     }
     
     /**
      * phpArmory5 destructor.
+     * @access      public
      */
     public function __destruct() {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getArea() {
+        
+    }
+
+    /**
+     * 
+     * @access      protected
+     */
+    protected function setArea($areaName) {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getLocale() {
+        
+    }
+
+    /**
+     * 
+     * @access      protected
+     */
+    protected function setLocale($localeName) {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getPatchLevel() {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getCharacterData($characterInfo) {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getCharacterIconURL() {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getGuildData($guildName = NULL, $realmName = NULL) {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getItemData($itemID) {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getItemDataByName($itemName, $filter = NULL) {
+        
+    }
+
+    /**
+     * 
+     * @access      public
+     */
+    public function getTalentData() {
+        
+    }
+
+    /**
+     * 
+     * @access      private
+     */
+    private function getXmlData($url, $userAgent = NULL, $timeout = NULL) {
+        
+    }
+
+    /**
+     * 
+     * @access      private
+     */
+    private function convertXmlToArray($xmlData, $includeTopTag = false, $lowerCaseTags = true) {
         
     }
 
