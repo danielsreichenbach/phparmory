@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: PHP data objects
+desc: |-
+  PHP5 offers a generic interface to database backends. It would be good
+  to support this interface in phpArmory. This would ease the use of other
+  backends, e.g. not only MySQL but SQLite or PostgreSQL, too.
+type: :feature
+component: phpArmoryCache class
+release: phpArmory 0.4.0
+reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-10-02 11:10:10.885119 Z
+references: []
+
+id: 2e896012cdd59ce98128597491a79e2e0435b456
+log_events: 
+- - 2008-10-02 11:10:13.794833 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - created
+  - ""
