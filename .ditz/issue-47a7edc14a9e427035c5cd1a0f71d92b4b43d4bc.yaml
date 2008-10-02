@@ -8,7 +8,7 @@ desc: |-
 type: :task
 component: phparmory
 release: phpArmory 0.4.0
-reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+reporter: Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
 status: :in_progress
 disposition: 
 creation_time: 2008-09-29 10:30:09.541958 Z
@@ -17,14 +17,14 @@ references: []
 id: 47a7edc14a9e427035c5cd1a0f71d92b4b43d4bc
 log_events: 
 - - 2008-09-29 10:30:15.291401 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - created
   - ""
 - - 2008-09-29 10:35:13.243293 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - assigned to release phpArmory 0.4.0 from unassigned
   - ""
 - - 2008-10-01 07:36:09.622072 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - changed status from unstarted to in_progress
   - Added class templates for both non-caching and caching class.

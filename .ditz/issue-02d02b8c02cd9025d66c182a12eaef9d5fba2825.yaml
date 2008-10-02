@@ -4,7 +4,7 @@ desc: Add functions to fetch arena data from the armory.
 type: :feature
 component: phpArmory class
 release: phpArmory 0.4.0
-reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+reporter: Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
 status: :in_progress
 disposition: 
 creation_time: 2008-09-29 10:31:15.375542 Z
@@ -13,14 +13,14 @@ references: []
 id: 02d02b8c02cd9025d66c182a12eaef9d5fba2825
 log_events: 
 - - 2008-09-29 10:31:18.291698 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - created
   - ""
 - - 2008-09-29 10:35:01.274101 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - assigned to release phpArmory 0.4.0 from unassigned
   - ""
 - - 2008-10-01 07:37:06.203043 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - changed status from unstarted to in_progress
   - Researching format of the arena team xml responses.

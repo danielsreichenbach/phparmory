@@ -6,7 +6,7 @@ desc: |-
 type: :task
 component: Documentation
 release: phpArmory 0.4.0
-reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+reporter: Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
 status: :in_progress
 disposition: 
 creation_time: 2008-09-29 10:32:08.320548 Z
@@ -15,15 +15,15 @@ references: []
 id: 2ebcc6a19eab29e8f2c3d5de877f591033608ac5
 log_events: 
 - - 2008-09-29 10:32:10.825242 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - created
   - ""
 - - 2008-09-29 10:34:42.377783 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - assigned to release phpArmory 0.4.0 from unassigned
   - ""
 - - 2008-10-01 07:38:32.056184 Z
-  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - changed status from unstarted to in_progress
   - |-
     Class documentation will be rewritten in the phpArmory5* class files.
