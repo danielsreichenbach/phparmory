@@ -13,7 +13,11 @@
  * @version 0.4.0
  */
 
-require_once('phpArmory.class.php');
+/**
+ * phpArmory5Cache extends phpArmory5, thus we require the base class file.
+ */
+require_once('phpArmory5.class.php');
+
 /**
  * phpArmory5Cache class
  * 

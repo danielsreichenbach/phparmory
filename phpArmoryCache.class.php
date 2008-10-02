@@ -1,40 +1,34 @@
 <?php
-
 /**
- * Project: phpArmoryCache: Extends the phpArmory class by caching the results in files or a database.
- * File:    phpArmoryCache.class.php
+ * phpArmoryCache is an embeddable class to retrieve XML data from the WoW armory.
  * 
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- *
- * For questions, help, comments, discussion, etc., please join the
- * phpArmory mailing list. Send a blank e-mail to
- * smarty-general-subscribe@lists.php.net
- *
- * @link http://sourceforge.net/projects/phparmory/
- * @copyright 2007 Michael Cotterell
+ * phpArmoryCache is an embeddable PHP5 class, which allow you to fetch XML data
+ * from the World of Warcraft armory in order to display arena teams,
+ * characters, guilds, and items on a web page. It can cache armory data in flat
+ * files or in a MySQL database.
  * @author Michael Cotterell <mepcotterell@gmail.com>
+ * @author Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
+ * @copyright Copyright (c) 2007, Michael Cotterell
+ * @copyright Copyright (c) 2008, Daniel S. Reichenbach
+ * @license http://www.opensource.org/licenses/gpl-3.0.html GNU General Public License version 3
+ * @link https://github.com/marenkay/phparmory/tree
  * @package phpArmory
- * @version 0.3
- *
+ * @version 0.3.2
  */
 
 /**
- * Include the phpArmory class to retrieve the XML from the Armory
+ * phpArmoryCache extends phpArmory, thus we require the base class file.
  */
-include('phpArmory.class.php');
+require_once('phpArmory.class.php');
 
+/**
+ * phpArmoryCache class
+ * 
+ * A class to fetch and cache unserialized XML data from the World of Warcraft
+ * armory site.
+ * @package phpArmory
+ * @subpackage classes
+ */
 class phpArmoryCache extends phpArmory {
     
     /**

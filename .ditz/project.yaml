@@ -24,3 +24,16 @@ releases:
     - |-
       phpArmory 0.4.0 should include the class conversion to PHP5 classes,
       and complete API documentation for phpArmory and phpArmoryCache.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: phpArmory 0.3.2
+  status: :released
+  release_time: 2008-10-02 09:22:28.624885 Z
+  log_events: 
+  - - 2008-10-02 09:21:26.181763 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - created
+    - Last release before the class migration to PHP5 format is done.
+  - - 2008-10-02 09:22:28.624911 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - released
+    - Last batch of bug fixes done.
