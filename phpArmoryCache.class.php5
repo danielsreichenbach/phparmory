@@ -27,14 +27,14 @@ require_once('phpArmory5.class.php');
  * @subpackage classes
  */
 class phpArmory5Cache extends phpArmory5 {
-    
+
     /**
      * Current version of the phpArmory5Cache class.
      * @access      private     
      * @var         string      Contains the current class version.
      */
     private static $version = '0.4.0';
-    
+
     /**
      * Current state of the phpArmory5Cache class. Allowed values are alpha, beta,
      * and release.
@@ -42,20 +42,20 @@ class phpArmory5Cache extends phpArmory5 {
      * @var         string      Contains the current versions' state.
      */
     private static $version_state = 'alpha';
-    
+
 	/**
 	 * 
 	 * @access      private     
 	 * @var         string      
 	 */
-	private var $ = "";
+	private $ = "";
 
 	/**
 	 * 
 	 * @access      private     
 	 * @var         integer     
 	 */
-	private var $ = 0;
+	private $ = 0;
 
     /**
      * phpArmory5Cache class constructor.
@@ -63,7 +63,7 @@ class phpArmory5Cache extends phpArmory5 {
     public function __construct() {
         
     }
-    
+
     /**
      * phpArmory5Cache destructor.
      */

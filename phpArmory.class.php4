@@ -459,6 +459,36 @@ class phpArmory {
 	
 		return ($includeTopTag ? $xmlArray : reset($xmlArray));
 
+        if (!$includeTopTag) {
+            unset($temp["page"]);
+        }
+
+        foreach ($temp as $key => $value) {
+
+            if (count($value)==1) {
+                $value = reset($value);
+            }
+
+            $levels = explode('::', $key);
+            $num_levels = count($levels);
+
+            if ($num_levels==1) {
+                $xmlArray[$levels[0]] = $value;
+            } else {
+                $pointer = &$xmlArray;
+                for ($i=0; $i<$num_levels; $i++) {
+                    if ( !isset( $pointer[$levels[$i]] ) ) {
+                        $pointer[$levels[$i]] = array();
+                    }
+                $pointer = &$pointer[$levels[$i]];
+                } // for
+            $pointer = $value;
+            } // if
+
+        } // foreach
+
+        return ($includeTopTag ? $xmlArray : reset($xmlArray));
+
 	}
 
 
