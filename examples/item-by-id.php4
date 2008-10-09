@@ -30,9 +30,15 @@ $armory->setArea($areaName);
 // Fetch item information
 $item = $armory->itemFetch($itemID);
 
-$string = print_r($item, 1);
-$string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
+$sapi_type = substr(php_sapi_name(), 0, 3);
 
-echo "\$item = ".$string;
+if ($sapi_type == 'cli') {
+    var_dump ($item);
+} else {
+    $string = print_r($item, 1);
+    $string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
+
+    echo "\$item = ".$string;
+}
  
 ?>

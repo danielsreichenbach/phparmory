@@ -31,9 +31,15 @@ $armory->setArea($areaName);
 // Fetch character information
 $char = $armory->characterFetch($charName, $realmName);
 
-$string = print_r($char, 1);
-$string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
+$sapi_type = substr(php_sapi_name(), 0, 3);
 
-echo "\$char = ".$string;
+if ($sapi_type == 'cli') {
+    var_dump ($char);
+} else {
+    $string = print_r($char, 1);
+    $string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
+
+    echo "\$char = ".$string;
+}
  
 ?>
