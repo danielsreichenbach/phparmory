@@ -33,7 +33,7 @@ class phpArmory5Cache extends phpArmory5 {
      * @access      private     
      * @var         string      Contains the current class version.
      */
-    private var $version = '0.4.0';
+    private static $version = '0.4.0';
     
     /**
      * Current state of the phpArmory5Cache class. Allowed values are alpha, beta,
@@ -41,7 +41,7 @@ class phpArmory5Cache extends phpArmory5 {
      * @access      private
      * @var         string      Contains the current versions' state.
      */
-    private var $version_state = 'alpha';
+    private static $version_state = 'alpha';
     
 	/**
 	 * 

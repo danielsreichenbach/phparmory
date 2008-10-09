@@ -28,7 +28,7 @@ class phpArmory5 {
      * @access      private     
      * @var         string      Contains the current class version.
      */
-    private var $version = '0.4.0';
+    private static $version = '0.4.0';
     
     /**
      * Current state of the phpArmory5 class. Allowed values are alpha, beta,
@@ -36,7 +36,7 @@ class phpArmory5 {
      * @access      private
      * @var         string      Contains the current versions' state.
      */
-    private var $version_state = 'alpha';
+    private static $version_state = 'alpha';
     
 	/**
 	 * The URL of the World of Warcraft armory website to be used.
@@ -106,7 +106,7 @@ class phpArmory5 {
 	 * out if no data has been yet retrieved.
 	 * received.
 	 * @access      private     
-	 * @var         integer
+	 * @var         integer     Contains the nr# of seconds to wait between connection tries.
 	 */
 	private var $timeOut = 5;
 
@@ -114,20 +114,23 @@ class phpArmory5 {
 	 * Time of last download, used to insert a random delay to prevent armorys'
 	 * weird behaviour.
 	 * @access      private     
-	 * @var         integer
+	 * @var         integer     Contains the time passed since last download.
 	 */
 	private var $lastDownload = 0;
 
 	/**
 	 * Number of retries for downloading data.
 	 * @access      private     
-	 * @var         integer
+	 * @var         integer     Contains the nr# of retries to perform in case of connection failures.
 	 */
 	private var $downloadRetries = 5;
 
     /**
      * phpArmory5 class constructor.
      * @access      public
+     * @param       string      $areaName               
+     * @param       int         $downloadRetries        
+     * @return      mixed       $result                 Returns TRUE if the class could be instantiated properly. Returns FALSE and an error string, if the class could not be instantiated.
      */
     public function __construct($areaName = NULL, $downloadRetries = NULL) {
         
@@ -142,88 +145,109 @@ class phpArmory5 {
     }
 
     /**
-     * 
+     * Provides information on the current area configuration of phpArmory.
      * @access      public
+     * @return      array       $areaSettings           Returns an array with self::$armoy, self::$wow, and self::$areaName.
      */
     public function getArea() {
         
     }
 
     /**
-     * 
+     * Configure the area in which phpArmory should operate.
      * @access      protected
+     * @param       string      $areaName               The area phpArmory should operate in.
+     * @return      mixed       $result                 Returns TRUE if $areaName is valid. Returns FALSE and an error string, if $areaName is not valid.
      */
     protected function setArea($areaName) {
         
     }
 
     /**
-     * 
+     * Provides information on the current locale in which phpArmory returns data.
      * @access      public
+     * @return      string      $localeName             Returns the current locales' name.
      */
     public function getLocale() {
         
     }
 
     /**
-     * 
+     * Configure the locale in which phpArmory should query the armory.
      * @access      protected
+     * @param       string      $localeName             The locale to query data in.
+     * @return      mixed       $result                 Returns TRUE if $localeName is valid. Returns FALSE and an error string, if $localeName is not valid.
      */
     protected function setLocale($localeName) {
         
     }
 
     /**
-     * 
+     * Provides information on the current patch level of World of Warcraft.
      * @access      public
+     * @return      array       $patchLevel             Returns an array with int $patchLevelMajor, int $patchLevelMinor, and int $patchLevelFix.
      */
     public function getPatchLevel() {
         
     }
 
     /**
-     * 
+     * Provides information on a specific character.
      * @access      public
+     * @param       string      $characterName          The characters' name.
+     * @param       string      $realmName              The characters' realm name.
+     * @return      mixed       $result                 Returns an array containing TRUE and characterData if $characterName and $realmName are valid, otherwise FALSE and errorMessage.
      */
-    public function getCharacterData($characterInfo) {
+    public function getCharacterData($characterName, $realmName) {
         
     }
 
     /**
-     * 
+     * Provides the link to the matching portrait icon for a charater.
      * @access      public
+     * @param       array       $characterInfo          The characterinfo array returned by self::getCharacterData.
+     * @return      string      $result                 Returns an array containing TRUE and characterIconURL if $characterInfo is valid, otherwise FALSE and errorMessage.
      */
     public function getCharacterIconURL() {
         
     }
 
     /**
-     * 
+     * Provides information on a specific guild.
      * @access      public
+     * @param       string      $guildName              The guilds' name.
+     * @param       string      $realmName              The guilds' realm name.
+     * @return      mixed       $result                 Returns an array containing TRUE and characterData if $guildName and $realmName are valid, otherwise FALSE and errorMessage.
      */
     public function getGuildData($guildName = NULL, $realmName = NULL) {
         
     }
 
     /**
-     * 
+     * Provides information on a specific item by querying its' ID.
      * @access      public
+     * @param       int         $itemID                 The items' ID.
+     * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
      */
     public function getItemData($itemID) {
         
     }
 
     /**
-     * 
+     * Provides information on a specific item by querying its' name.
      * @access      public
+     * @param       string      $itemName               The items' name.
+     * @param       string      $itemFilter             An associative array of search paramters.
+     * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
      */
     public function getItemDataByName($itemName, $filter = NULL) {
         
     }
 
     /**
-     * 
+     * Provides information on the current talent tree definitions used by all character classes World of Warcraft.
      * @access      public
+     * @return      mixed       $result                 Returns an array containing TRUE and TalentDefinitions, otherwise FALSE and errorMessage.
      */
     public function getTalentData() {
         

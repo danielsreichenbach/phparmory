@@ -1,3 +1,18 @@
+0.4.0 - ??? ??, 2008
+phpArmory has been rewritten for PHP5 and the new OOP class syntax. The class
+interfaces have been changed to use getFunction() and setFunction() syntax,
+and class variables have been adjusted to use private, protected, and public
+states. Please consult the doc/ folder for updated API documentation.
+
+== Bugs squashed ==
+* 
+
+== Features added ==
+* 
+
+== Features changed ==
+* 
+
 0.3.2 - Oct 02, 2008
 A pure bugfix release.
 
