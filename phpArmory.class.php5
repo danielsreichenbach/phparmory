@@ -28,7 +28,7 @@ class phpArmory5 {
      * @access      private
      * @var         string      Contains the current class version.
      */
-    protected static $version = "0.4.0";
+    protected $version = "0.4.0";
 
     /**
      * Current state of the phpArmory5 class. Allowed values are alpha, beta,
@@ -36,7 +36,7 @@ class phpArmory5 {
      * @access      private
      * @var         string      Contains the current versions' state.
      */
-    protected static $version_state = "alpha";
+    protected $version_state = "alpha";
 
     /**
      * The URL of the World of Warcraft armory website to be used.
@@ -240,7 +240,7 @@ class phpArmory5 {
             if (time() < $this->lastDownload+1) {
 
                 $delay = rand (1,2);
-                trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Inserting fetch delay of" . $delay . " seconds.", E_USER_NOTICE);
+                trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Inserting fetch delay of " . $delay . " seconds.", E_USER_NOTICE);
                 sleep($delay);    //random delay
 
             } // if
@@ -268,23 +268,24 @@ class phpArmory5 {
 
             curl_close($ch);
 
-            if ( strpos ( $f, 'errCode="noCharacter"' ) ) return ( "Character not found on armory, check spelling and area settings!" );
+            if ( strpos ( $f, 'errCode="noCharacter"' ) ) return ( array ( 'result' => FALSE, 'error' => "Character not found on armory, check spelling and area settings!") );
 
-            if ( strpos ( $f, 'errorhtml' ) AND $i <= $this->downloadRetries-1 ) return ("Armory send an error page, retrying..." );
+            if ( strpos ( $f, 'errorhtml' ) AND $i <= $this->downloadRetries-1 ) return ( array( 'result' => FALSE, 'error' => "Armory send an error page, retrying...") );
             else {
                 if ( strlen ( $f ) AND $i <= $this->downloadRetries-1 ) break;
-                    else return ( "No data, retrying..." );
+                    else return ( array ('result' => FALSE, 'error' => "No data, retrying...") );
             }
 
         } // for
 
         if ( strlen ( $f ) < 100 ) {
 
-            return ( "Download failed, giving up! Server response: " . $f );
+            return ( array( 'result' => FALSE, 'error' => "Download failed, giving up! Server response: " . $f) );
 
         }
 
-        return $f;
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Fetched [" . $url . "] in " . $i . " tries.", E_USER_NOTICE);
+        return array ( 'result' => TRUE, 'XmlData' => $f);
 
     }
 
@@ -399,7 +400,7 @@ class phpArmory5 {
     /**
      * Provides information on the current patch level of World of Warcraft.
      * @access      public
-     * @return      array       $patchLevel             Returns an array with int $patchLevelMajor, int $patchLevelMinor, and int $patchLevelFix.
+     * @return      string       $patchLevel             Returns a string with int $patchLevelMajor, int $patchLevelMinor, and int $patchLevelFix.
      */
     public function getPatchLevel() {
         $major = 0;
@@ -409,13 +410,17 @@ class phpArmory5 {
         if ($this->areaName == 'eu') {
             $patchnotes = $this->getXmlData ( $this->wow . "en/patchnotes/", NULL, 5);
 
-            // Current patch header = <h3 class="blood">Patch 2.4.3</h3>
-            if ( !preg_match( '@<h3 .+>Patch ([0-9\.]+)</h3>@', $patchnotes, $matches ) ) return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+            if (is_array($patchnotes) && array_key_exists ('XmlData' , $patchnotes)) {
+                // Current patch header = <h3 class="blood">Patch 2.4.3</h3>
+                if ( !preg_match( '@<h3 .+>Patch ([0-9\.]+)</h3>@', $patchnotes['XmlData'], $matches ) ) return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+            }
         } elseif ($this->areaName == 'us') {
             $patchnotes = $this->getXmlData($this->wow."patchnotes/",NULL,5);
 
-            // Current patch header = <b>World of Warcraft Client Patch 2.4.3 (2008-07-15)</b>
-            if ( !preg_match( '@<a href="/patchnotes/">Patch ([0-9\.]+)</a>@', $patchnotes, $matches ) ) return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+            if (is_array($patchnotes) && array_key_exists ('XmlData' , $patchnotes)) {
+                // Current patch header = <b>World of Warcraft Client Patch 2.4.3 (2008-07-15)</b>
+                if ( !preg_match( '@<a href="/patchnotes/">Patch ([0-9\.]+)</a>@', $patchnotes['XmlData'], $matches ) ) return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+            }
         }
 
         list ( $major, $minor, $patch ) = explode ( ".", $matches[1] );
@@ -429,7 +434,25 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and TalentDefinitions, otherwise FALSE and errorMessage.
      */
     public function getTalentData() {
+        $classes = array (
+                            "Deathknight",
+                            "Druid",
+                            "Hunter",
+                            "Mage",
+                            "Paladin",
+                            "Priest",
+                            "Rogue",
+                            "Shaman",
+                            "Warlock",
+                            "Warrior"
+                        );
+        foreach ( $classes as $class ) {
+            $class = strtolower ( $class );
+            $url = $this->wow . "shared/global/talents/".$class."/data.js";
+            $result[$class] = $this->getXmlData($url);
+        }
 
+        return $result;
     }
 
     /**
