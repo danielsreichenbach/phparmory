@@ -1,7 +1,7 @@
 <?php
 /**
  * phpArmory is an embeddable class to retrieve XML data from the WoW armory.
- * 
+ *
  * phpArmory is an embeddable PHP5 class, which allow you to fetch XML data
  * from the World of Warcraft armory in order to display arena teams,
  * characters, guilds, and items on a web page.
@@ -20,7 +20,7 @@ require_once('phpArmory5.class.php');
 
 /**
  * phpArmory5Cache class
- * 
+ *
  * A class to fetch and cache unserialized XML data from the World of Warcraft
  * armory site.
  * @package phpArmory
@@ -30,7 +30,7 @@ class phpArmory5Cache extends phpArmory5 {
 
     /**
      * Current version of the phpArmory5Cache class.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the current class version.
      */
     private static $version = '0.4.0';
@@ -43,32 +43,32 @@ class phpArmory5Cache extends phpArmory5 {
      */
     private static $version_state = 'alpha';
 
-	/**
-	 * 
-	 * @access      private     
-	 * @var         string      
-	 */
-	private $ = "";
+    /**
+     *
+     * @access      private
+     * @var         string
+     */
+    private $ = "";
 
-	/**
-	 * 
-	 * @access      private     
-	 * @var         integer     
-	 */
-	private $ = 0;
+    /**
+     *
+     * @access      private
+     * @var         integer
+     */
+    private $ = 0;
 
     /**
      * phpArmory5Cache class constructor.
      */
     public function __construct() {
-        
+
     }
 
     /**
      * phpArmory5Cache destructor.
      */
     public function __destruct() {
-        
+
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * phpArmory is an embeddable class to retrieve XML data from the WoW armory.
- * 
+ *
  * phpArmory is an embeddable PHP5 class, which allow you to fetch XML data
  * from the World of Warcraft armory in order to display arena teams,
  * characters, guilds, and items on a web page.
@@ -15,7 +15,7 @@
 
 /**
  * phpArmory5 class
- * 
+ *
  * A class to fetch and unserialize XML data from the World of Warcraft armory
  * site.
  * @package phpArmory
@@ -25,7 +25,7 @@ class phpArmory5 {
 
     /**
      * Current version of the phpArmory5 class.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the current class version.
      */
     protected static $version = "0.4.0";
@@ -40,104 +40,116 @@ class phpArmory5 {
 
     /**
      * The URL of the World of Warcraft armory website to be used.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the URL of the armory website.
      */
-    private $armory = "http://www.wowarmory.com/";
+    protected $armory = "http://www.wowarmory.com/";
 
     /**
      * The URL of the World of Warcraft website to be used.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the URL of the World of Warcraft website.
      */
-    private $wow = "http://www.worldofwarcraft.com/";
+    protected $wow = "http://www.worldofwarcraft.com/";
 
     /**
      * The armory area to send requests to.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the area / region to be used.
      */
-    private $areaName = "us";
+    protected $areaName = "us";
 
     /**
      * The locale used to send requests.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the locale used to send requests.
      */
-    private $localeName = "en";
+    protected $localeName = "en";
 
     /**
      * The case sensitive name of a realm.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the case sensitive name of a realm.
      */
     private $realmName = "";
 
     /**
      * The case sensitive name of a arena team.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the case sensitive name of a arena team.
      */
     private $arenaTeam = "";
 
     /**
      * The case sensitive name of a guild.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the case sensitive name of a guild.
      */
     private $guildName = "";
 
     /**
      * The case sensitive name of a character.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the case sensitive name of a character.
      */
     private $characterName = "";
 
     /**
      * The default user agent for making HTTP requests.
-     * @access      private     
+     * @access      private
      * @var         string      Contains the user agent string used to query the armory.
      */
-    private $userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11";
+    protected $userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11";
 
     /**
      * The amount of time in seconds after which to consider a connection timed
      * out if no data has been yet retrieved.
      * received.
-     * @access      private     
+     * @access      private
      * @var         integer     Contains the nr# of seconds to wait between connection tries.
      */
-    private $timeOut = 5;
+    protected $timeOut = 5;
 
     /**
      * Time of last download, used to insert a random delay to prevent armorys'
      * weird behaviour.
-     * @access      private     
+     * @access      private
      * @var         integer     Contains the time passed since last download.
      */
-    private $lastDownload = 0;
+    protected $lastDownload = 0;
 
     /**
      * Number of retries for downloading data.
-     * @access      private     
+     * @access      private
      * @var         integer     Contains the nr# of retries to perform in case of connection failures.
      */
-    private $downloadRetries = 5;
+    protected $downloadRetries = 5;
 
     /**
      * phpArmory5 class constructor.
      * @access      public
-     * @param       string      $areaName               
-     * @param       int         $downloadRetries        
+     * @param       string      $areaName
+     * @param       int         $downloadRetries
      * @return      mixed       $result                 Returns TRUE if the class could be instantiated properly. Returns FALSE and an error string, if the class could not be instantiated.
      */
     public function __construct($areaName = NULL, $downloadRetries = NULL) {
 
         if (!extension_loaded('curl') && !extension_loaded('xml')) {
-            trigger_error("phpArmory (version " . self::$version . " - " . self::$version_state . " release): The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
+            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
         } else {
-            trigger_error("phpArmory (version " . self::$version . " - " . self::$version_state . " release): Found \"curl\" and \"xml\" extensions.", E_USER_NOTICE);
+
+            // If an area is provided, we will configure armory site, wow site, and language appropriately.
+            if ($areaName) {
+                self::setArea($areaName);
+            }
+
+            // If we received a limit for download retries, we will use it.
+            if ($downloadRetries) {
+                $this->downloadRetries = $downloadRetries;
+            }
+
+            // The class is now properly configured.
+            return TRUE;
         }
     }
 
@@ -146,16 +158,16 @@ class phpArmory5 {
      * @access      public
      */
     public function __destruct() {
-        
+
     }
 
     /**
      * Provides information on the current area configuration of phpArmory.
      * @access      public
-     * @return      array       $areaSettings           Returns an array with self::$armoy, self::$wow, and self::$areaName.
+     * @return      array       $areaSettings           Returns an array with $this->armory, $this->wow, and $this->areaName.
      */
     public function getArea() {
-        
+        return array ( $this->armory, $this->wow, $this->areaName );
     }
 
     /**
@@ -165,7 +177,18 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns TRUE if $areaName is valid. Returns FALSE and an error string, if $areaName is not valid.
      */
     protected function setArea($areaName) {
-        
+        switch($areaName) {
+            case 'eu':
+                $this->areaName = 'eu';
+                $this->armory   = 'http://eu.wowarmory.com/';
+                $this->wow      = 'http://www.wow-europe.com/';
+                break;
+            case 'us':
+                $this->areaName = 'us';
+                $this->armory   = 'http://www.wowarmory.com/';
+                $this->wow      = 'http://www.worldofwarcraft.com/';
+                break;
+        }
     }
 
     /**
@@ -174,7 +197,7 @@ class phpArmory5 {
      * @return      string      $localeName             Returns the current locales' name.
      */
     public function getLocale() {
-        
+        return $this->localeName;
     }
 
     /**
@@ -184,11 +207,11 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns TRUE if $localeName is valid. Returns FALSE and an error string, if $localeName is not valid.
      */
     protected function setLocale($localeName) {
-        
+
     }
 
     /**
-     * 
+     *
      * @access      protected
      * @param       string      $url                    URL of the page to fetch data from.
      * @param       string      $userAgent              The user agent making the GET request.
@@ -196,84 +219,68 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns TRUE if $url is valid, and could be fetched. Returns FALSE and an error string, if $url is not valid.
      */
     protected function getXmlData($url, $userAgent = NULL, $timeOut = NULL) {
-        
-        // If no user agent is defined, use our pre-defined userAgent from the class definition.
-        if ( ($userAgent == NULL) && (self::$userAgent)) {
 
-            $userAgent = self::$userAgent;
+        // If no user agent is defined, use our pre-defined userAgent from the class definition.
+        if ( ($userAgent == NULL) && ($this->userAgent)) {
+
+            $userAgent = $this->userAgent;
 
         }
 
         // If no timeout is defined, use our pre-defined timeout from the class definition.
-        if ( ($timeOut == NULL) && (self::$timeOut)) {
+        if ( ($timeOut == NULL) && ($this->timeOut)) {
 
-            $timeout = self::$timeOut;
+            $timeout = $this->timeOut;
 
         }
 
         // Try to download from the given URL for a maximum of our pre-defined download retries from the class definition.
-        for ( $i = 1; $i <= self::$downloadRetries; $i++ ) {
+        for ( $i = 1; $i <= $this->downloadRetries; $i++ ) {
 
-            if (time() < self::$lastDownload+1) {
+            if (time() < $this->lastDownload+1) {
 
                 $delay = rand (1,2);
-                trigger_error("phpArmory (version " . self::$version . " - " . self::$version_state . " release): Inserting fetch delay of" . $delay . " seconds.", E_USER_NOTICE);
+                trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Inserting fetch delay of" . $delay . " seconds.", E_USER_NOTICE);
                 sleep($delay);    //random delay
 
             } // if
 
-            trigger_error("phpArmory (version " . self::$version . " - " . self::$version_state . " release): Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
+            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
             $ch = curl_init();
-            $timeout = self::$timeOut;
+            $timeout = $this->timeOut;
 
-            curl_setopt ($ch, CURLOPT_URL, $url);
-            curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-            curl_setopt ($ch, CURLOPT_USERAGENT, $userAgent);
-            curl_setopt ($ch, CURLOPT_HEADER, 0);
-            curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 0);
-            curl_setopt ($ch, CURLOPT_FORBID_REUSE, 1);
-            curl_setopt ($ch, CURLOPT_LOW_SPEED_LIMIT, 5);
-            curl_setopt ($ch, CURLOPT_LOW_SPEED_TIME, $timeout);
-            curl_setopt ($ch, CURLOPT_TIMEVALUE, $timeout*3);
+            curl_setopt ( $ch, CURLOPT_URL, $url );
+            curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt ( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
+            curl_setopt ( $ch, CURLOPT_USERAGENT, $userAgent );
+            curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+            curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 0 );
+            curl_setopt ( $ch, CURLOPT_FORBID_REUSE, 1 );
+            curl_setopt ( $ch, CURLOPT_LOW_SPEED_LIMIT, 5 );
+            curl_setopt ( $ch, CURLOPT_LOW_SPEED_TIME, $timeout );
+            curl_setopt ( $ch, CURLOPT_TIMEVALUE, $timeout*3 );
 
-            $f = curl_exec($ch);
-            self::$lastDownload = time();
-            
+            $f = curl_exec ( $ch );
+            $this->lastDownload = time();
+
             // Disabled reporting of the fetched content in error logs. This may spam your host. Only uncomment this line if you are working on localhost aka 127.0.0.1.
-            // trigger_error("phpArmory (version " . self::$version . " - " . self::$version_state . " release): Fetched content: " . $f, E_USER_NOTICE);
-            
+            // trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Fetched content: " . $f, E_USER_NOTICE);
+
             curl_close($ch);
 
-            if ( strpos($f,'errCode="noCharacter"') ) {
+            if ( strpos ( $f, 'errCode="noCharacter"' ) ) return ( "Character not found on armory, check spelling and area settings!" );
 
-                return ("Character not found on armory, check spelling and area settings!");
-
-            } // if
-
-            if ( strpos($f,'errorhtml') AND $i <= self::$downloadRetries-1 ) {
-
-                return ("Armory send an error page, retrying...");
-
-            } else {
-
-                if ( strlen($f) AND $i<=$this->retries-1 ) {
-
-                    break;
-
-                } else {
-
-                    return ("No data, retrying...");
-
-                } // if
-
-            } // if
+            if ( strpos ( $f, 'errorhtml' ) AND $i <= $this->downloadRetries-1 ) return ("Armory send an error page, retrying..." );
+            else {
+                if ( strlen ( $f ) AND $i <= $this->downloadRetries-1 ) break;
+                    else return ( "No data, retrying..." );
+            }
 
         } // for
 
-        if ( strlen($f)<100 ) {
+        if ( strlen ( $f ) < 100 ) {
 
-            return ("Download failed, giving up! Server response: ".$f);
+            return ( "Download failed, giving up! Server response: " . $f );
 
         }
 
@@ -327,7 +334,7 @@ class phpArmory5 {
                         $temp[$p] = $data;
 
                     }
-                    
+
                     if ($value['type']=='complete') {
 
                         array_pop($depth);
@@ -342,7 +349,7 @@ class phpArmory5 {
             }  // switch
 
         } // foreach
-    
+
         if (!$includeTopTag) {
 
             unset($temp["page"]);
@@ -395,7 +402,25 @@ class phpArmory5 {
      * @return      array       $patchLevel             Returns an array with int $patchLevelMajor, int $patchLevelMinor, and int $patchLevelFix.
      */
     public function getPatchLevel() {
-        
+        $major = 0;
+        $minor = 0;
+        $patch = 0;
+
+        if ($this->areaName == 'eu') {
+            $patchnotes = $this->getXmlData ( $this->wow . "en/patchnotes/", NULL, 5);
+
+            // Current patch header = <h3 class="blood">Patch 2.4.3</h3>
+            if ( !preg_match( '@<h3 .+>Patch ([0-9\.]+)</h3>@', $patchnotes, $matches ) ) return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+        } elseif ($this->areaName == 'us') {
+            $patchnotes = $this->getXmlData($this->wow."patchnotes/",NULL,5);
+
+            // Current patch header = <b>World of Warcraft Client Patch 2.4.3 (2008-07-15)</b>
+            if ( !preg_match( '@<a href="/patchnotes/">Patch ([0-9\.]+)</a>@', $patchnotes, $matches ) ) return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+        }
+
+        list ( $major, $minor, $patch ) = explode ( ".", $matches[1] );
+        return sprintf ( "%02d%02d%02d", $major, $minor, $patch );
+
     }
 
     /**
@@ -404,7 +429,7 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and TalentDefinitions, otherwise FALSE and errorMessage.
      */
     public function getTalentData() {
-        
+
     }
 
     /**
@@ -415,7 +440,7 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and arenaTeamData if $arenaTeamName and $realmName are valid, otherwise FALSE and errorMessage.
      */
     public function getArenaTeamData($arenaTeamName, $realmName) {
-        
+
     }
 
     /**
@@ -426,7 +451,7 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and characterData if $characterName and $realmName are valid, otherwise FALSE and errorMessage.
      */
     public function getCharacterData($characterName, $realmName) {
-        
+
     }
 
     /**
@@ -436,7 +461,7 @@ class phpArmory5 {
      * @return      string      $result                 Returns an array containing TRUE and characterIconURL if $characterInfo is valid, otherwise FALSE and errorMessage.
      */
     public function getCharacterIconURL() {
-        
+
     }
 
     /**
@@ -447,7 +472,7 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and characterData if $guildName and $realmName are valid, otherwise FALSE and errorMessage.
      */
     public function getGuildData($guildName = NULL, $realmName = NULL) {
-        
+
     }
 
     /**
@@ -457,7 +482,7 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
      */
     public function getItemData($itemID) {
-        
+
     }
 
     /**
@@ -468,7 +493,7 @@ class phpArmory5 {
      * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
      */
     public function getItemDataByName($itemName, $filter = NULL) {
-        
+
     }
 
 }

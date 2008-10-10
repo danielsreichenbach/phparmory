@@ -1,7 +1,7 @@
 <?php
 /**
  * phpArmoryCache is an embeddable class to retrieve XML data from the WoW armory.
- * 
+ *
  * phpArmoryCache is an embeddable PHP5 class, which allow you to fetch XML data
  * from the World of Warcraft armory in order to display arena teams,
  * characters, guilds, and items on a web page. It can cache armory data in flat
@@ -23,14 +23,14 @@ require_once('phpArmory.class.php');
 
 /**
  * phpArmoryCache class
- * 
+ *
  * A class to fetch and cache unserialized XML data from the World of Warcraft
  * armory site.
  * @package phpArmory
  * @subpackage classes
  */
 class phpArmoryCache extends phpArmory {
-    
+
     /**
      * Data storage format ("flat" or "mysql")
      *
@@ -59,12 +59,12 @@ class phpArmoryCache extends phpArmory {
      */
     var $dataTable = "armory_cache";
 
-	/**
-	 * Number of retries for downloading
-	 *
-	 * @var integer
-	 */
-	var $retries = 5;
+    /**
+     * Number of retries for downloading
+     *
+     * @var integer
+     */
+    var $retries = 5;
 
     /**
      * Internal cache id of the current item
@@ -72,7 +72,7 @@ class phpArmoryCache extends phpArmory {
      * @var integer
      */
     var $cacheID = 0;
-    
+
     /**#@-*/
     /**
     * The Constructor
@@ -91,36 +91,36 @@ class phpArmoryCache extends phpArmory {
     * @param integer    $retries        Time (in seconds) between cache updates
     */
     function phpArmoryCache($armory = NULL, $dataStore = NULL, $dataConn = NULL, $dataTable = NULL, $retries = NULL) {
-        
+
         if(($retries==NULL)&&($this->retries)){
             $retries = $this->retries;
         } else {
             $this->retries = $retries;
         }
-        
+
         if(($dataStore==NULL)&&($this->dataStore)){
             $dataStore = $this->dataStore;
         } else {
             $this->dataStore = $dataStore;
         }
-        
+
         if(($dataConn==NULL)&&($this->dataConn)){
             $dataConn = $this->dataConn;
         } else {
             $this->dataConn = $dataConn;
         }
-        
+
         if(($dataTable==NULL)&&($this->dataTable)){
             $dataTable = $this->dataTable;
         } else {
             $this->dataTable = $dataTable;
         }
-        
+
         switch($this->dataStore) {
-        
+
             case 'flat':
                 break;
-            
+
             case 'mysql':
                 $conn = @parse_url($this->dataConn);
                 $this->dataConn = mysql_connect($conn['host'], $conn['user'], $conn['pass']) or die("Failed to connect to database");
@@ -132,17 +132,17 @@ class phpArmoryCache extends phpArmory {
                             `cache_xml` TEXT,
                             PRIMARY KEY `cache_id` (`cache_id`))";
                 mysql_query($query, $this->dataConn) or die("Unable to create the cache table");
-                
+
                 break;
-            
+
             default:
-                die("Invalid dataStore defined."); 
+                die("Invalid dataStore defined.");
                 break;
-        
+
         }
-        
+
         $this->phpArmory($armory);
-        
+
     }
 
     /**
@@ -157,10 +157,10 @@ class phpArmoryCache extends phpArmory {
     * @author Claire Matthews <poeticdragon@stormblaze.net>
     */
     function characterFetch($character = NULL, $realm = NULL){
-        
+
         if(($character==NULL)&&($this->character)) $character = $this->character;
         if(($realm==NULL)&&($this->realm)) $realm = $this->realm;
-        
+
         $this->cacheID = "c".md5($character.$realm);
         $cached = $this->cacheFetch($this->cacheID);
 
@@ -179,10 +179,10 @@ class phpArmoryCache extends phpArmory {
         }
 
     }
-    
+
     /**
     * guildFetch
-    * 
+    *
     * Attempts to fetch a cached version of the requested
     * guild. Otherwise, it calls the parent function.
     *
@@ -192,10 +192,10 @@ class phpArmoryCache extends phpArmory {
     * @author Claire Matthews <poeticdragon@stormblaze.net>
     */
     function guildFetch($guild = NULL, $realm = NULL){
-    
+
         if(($guild==NULL)&&($this->guild)) $guild = $this->guild;
         if(($realm==NULL)&&($this->realm)) $realm = $this->realm;
-    
+
         $this->cacheID = "g".md5($guild.$realm);
         $cached = $this->cacheFetch($this->cacheID);
 
@@ -212,12 +212,12 @@ class phpArmoryCache extends phpArmory {
         } else {
             return $cached;
         }
-    
+
     }
 
     /**
     * itemFetch
-    * 
+    *
     * Attempts to fetch a cached version of the requested
     * item. Otherwise, it calls the parent function.
     *
@@ -226,7 +226,7 @@ class phpArmoryCache extends phpArmory {
     * @author Claire Matthews <poeticdragon@stormblaze.net>
     */
     function itemFetch($itemID){
-    
+
         $this->cacheID = "i".md5($itemID);
         $cached = $this->cacheFetch($this->cacheID);
 
@@ -243,12 +243,12 @@ class phpArmoryCache extends phpArmory {
         }else{
             return $cached;
         }
-    
+
     }
 
     /**
     * itemNameFetch
-    * 
+    *
     * Attempts to fetch a cached version of the requested
     * item search. Otherwise, it calls the parent function.
     *
@@ -258,7 +258,7 @@ class phpArmoryCache extends phpArmory {
     * @author Claire Matthews <poeticdragon@stormblaze.net>
     */
     function itemNameFetch($item, $filter = NULL) {
-    
+
         if ($filter&&is_array($filter)) {
             $this->cacheID = "s".md5($item.implode('', $filter));
         } else {
@@ -279,12 +279,12 @@ class phpArmoryCache extends phpArmory {
         }else{
             return $cached;
         }
-    
+
     }
 
     /**
     * xmlFetch
-    * 
+    *
     * This fetches the XML data as normal by calling
     * the parent function. If a cache id is set, it will
     * save the XML data to the cache and then unset the id.
@@ -311,7 +311,7 @@ class phpArmoryCache extends phpArmory {
 
     /**
     * cacheFetch
-    * 
+    *
     * This function returns the unserialized XML data
     * for the requested cache id from the cache. It
     * will also remove old cached files/rows that have
@@ -324,7 +324,7 @@ class phpArmoryCache extends phpArmory {
     function cacheFetch($cacheID) {
 
         switch($this->dataStore){
-        
+
             case "flat":
                 $filename = $this->dataPath."/".$cacheID;
                 if (file_exists($filename)) {
@@ -338,7 +338,7 @@ class phpArmoryCache extends phpArmory {
                     }
                 }
                 break;
-                
+
             case "mysql":
                 $query = "SELECT cache_xml, UNIX_TIMESTAMP(cache_time) AS cache_time FROM `".$this->dataTable."` WHERE cache_id = '".$cacheID."'";
                 $result = mysql_query($query, $this->dataConn) or die("Unable to select cache from database");
@@ -352,14 +352,14 @@ class phpArmoryCache extends phpArmory {
                     }
                 }
                 break;
-        
+
         }
 
     }
 
     /**
     * cacheSave
-    * 
+    *
     * This function saves the given XML data to the
     * cache by its cache id.
     *
@@ -370,28 +370,28 @@ class phpArmoryCache extends phpArmory {
     function cacheSave($cacheID, $xml) {
 
         switch($this->dataStore){
-        
+
             case "flat":
                 $filename = $this->dataPath."/".$cacheID;
                 $handle = fopen($filename, 'x') or die("Cannot open file ($filename)");
                 fwrite($handle, $xml) or die("Cannot write to file ($filename)");
                 fclose($handle);
                 break;
-                
+
             case "mysql":
                 if (get_magic_quotes_gpc()) $xml = stripslashes($xml);
                 $xml = mysql_escape_string($xml);
                 $query = "REPLACE INTO `".$this->dataTable."` (cache_id, cache_xml) VALUES('".$cacheID."','".$xml."')";
                 mysql_query($query, $this->dataConn) or die("Unable to save to database " . mysql_error());
                 break;
-        
+
         }
-        
+
     }
 
-    
+
     /**#@-*/
-    
+
 }
 
 ?>
