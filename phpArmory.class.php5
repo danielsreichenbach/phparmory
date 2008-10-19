@@ -164,19 +164,19 @@ class phpArmory5 {
     /**
      * Provides information on the current area configuration of phpArmory.
      * @access      public
-     * @return      array       $areaSettings           Returns an array with $this->armory, $this->wow, and $this->areaName.
+     * @return      array       $areaSettings           Returns an array with $this->areaName, $this->armory, and $this->wow.
      */
     public function getArea() {
-        return array ( $this->armory, $this->wow, $this->areaName );
+        return array ( $this->areaName, $this->armory, $this->wow );
     }
 
     /**
      * Configure the area in which phpArmory should operate.
      * @access      protected
      * @param       string      $areaName               The area phpArmory should operate in.
-     * @return      mixed       $result                 Returns TRUE if $areaName is valid. Returns FALSE and an error string, if $areaName is not valid.
+     * @return      bool        $result                 Returns TRUE if $areaName was set.
      */
-    protected function setArea($areaName) {
+    public function setArea($areaName) {
         switch($areaName) {
             case 'eu':
                 $this->areaName = 'eu';
@@ -188,7 +188,18 @@ class phpArmory5 {
                 $this->armory   = 'http://www.wowarmory.com/';
                 $this->wow      = 'http://www.worldofwarcraft.com/';
                 break;
+            default:
+                $this->areaName = 'eu';
+                $this->armory   = 'http://eu.wowarmory.com/';
+                $this->wow      = 'http://www.wow-europe.com/';
+                break;
         }
+
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Area now is [" . $this->areaName . "].", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Armory now is [" . $this->armory . "].", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Wow site now is [" . $this->wow . "].", E_USER_NOTICE);
+
+        return TRUE;
     }
 
     /**
@@ -204,10 +215,27 @@ class phpArmory5 {
      * Configure the locale in which phpArmory should query the armory.
      * @access      protected
      * @param       string      $localeName             The locale to query data in.
-     * @return      mixed       $result                 Returns TRUE if $localeName is valid. Returns FALSE and an error string, if $localeName is not valid.
+     * @return      bool        $result                 Returns TRUE if $localeName was set.
      */
-    protected function setLocale($localeName) {
+    public function setLocale($localeName) {
 
+        if ($this->areaName == 'us') {
+            if ($localeName == 'en') {
+                $this->localeName = $localeName;
+            } else {
+                $this->localeName = 'en';
+            }
+        } elseif ($this->areaName == 'eu') {
+            if ($localeName == 'de' | $localeName == 'en' | $localeName == 'es' | $localeName == 'fr' ) {
+                $this->localeName = $localeName;
+            } else {
+                $this->localeName = 'en';
+            }
+        }
+
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Locale now is [" . $this->localeName . "].", E_USER_NOTICE);
+
+        return TRUE;
     }
 
     /**
@@ -253,6 +281,7 @@ class phpArmory5 {
             curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
             curl_setopt ( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
             curl_setopt ( $ch, CURLOPT_USERAGENT, $userAgent );
+            curl_setopt ( $ch, CURLOPT_HTTPHEADER, array('Accept-language: ' . $this->localeName) );
             curl_setopt ( $ch, CURLOPT_HEADER, 0 );
             curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, 0 );
             curl_setopt ( $ch, CURLOPT_FORBID_REUSE, 1 );
