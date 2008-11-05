@@ -490,6 +490,7 @@ class phpArmory5 {
      * @param       string      $arenaName              The arena teams' name.
      * @param       string      $realmName              The arena teams' realm name.
      * @return      mixed       $result                 Returns an array containing TRUE and arenaTeamData if $arenaTeamName and $realmName are valid, otherwise FALSE and errorMessage.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function getArenaTeamData($arenaTeamName, $realmName) {
 
@@ -501,6 +502,7 @@ class phpArmory5 {
      * @param       string      $characterName          The characters' name.
      * @param       string      $realmName              The characters' realm name.
      * @return      mixed       $result                 Returns an array containing TRUE and characterData if $characterName and $realmName are valid, otherwise FALSE and errorMessage.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function getCharacterData($characterName, $realmName) {
 
@@ -511,6 +513,7 @@ class phpArmory5 {
      * @access      public
      * @param       array       $characterInfo          The characterinfo array returned by self::getCharacterData.
      * @return      string      $result                 Returns an array containing TRUE and characterIconURL if $characterInfo is valid, otherwise FALSE and errorMessage.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function getCharacterIconURL() {
 
@@ -522,6 +525,7 @@ class phpArmory5 {
      * @param       string      $guildName              The guilds' name.
      * @param       string      $realmName              The guilds' realm name.
      * @return      mixed       $result                 Returns an array containing TRUE and characterData if $guildName and $realmName are valid, otherwise FALSE and errorMessage.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function getGuildData($guildName = NULL, $realmName = NULL) {
 
@@ -532,6 +536,7 @@ class phpArmory5 {
      * @access      public
      * @param       int         $itemID                 The items' ID.
      * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function getItemData($itemID) {
 
@@ -543,6 +548,7 @@ class phpArmory5 {
      * @param       string      $itemName               The items' name.
      * @param       string      $itemFilter             An associative array of search paramters.
      * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function getItemDataByName($itemName, $filter = NULL) {
 

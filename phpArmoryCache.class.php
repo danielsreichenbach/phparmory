@@ -59,6 +59,7 @@ class phpArmory5Cache extends phpArmory5 {
 
     /**
      * phpArmory5Cache class constructor.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function __construct() {
 
@@ -66,6 +67,7 @@ class phpArmory5Cache extends phpArmory5 {
 
     /**
      * phpArmory5Cache destructor.
+     * @todo IMPLEMENTATION MISSING.
      */
     public function __destruct() {
 

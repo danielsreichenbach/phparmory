@@ -1,6 +1,9 @@
 # 0.4.0 - “Jack-o’-Lantern” - ??? ??, 2008
 
-phpArmory has been rewritten for PHP5 and the new OOP class syntax. The class interfaces have been changed to use getFunction() and setFunction() syntax, and class variables have been adjusted to use private, protected, and public states. Please consult the doc/ folder for updated API documentation.
+phpArmory has been rewritten for PHP5 and the new OOP class syntax. The class
+interfaces have been changed to use getFunction() and setFunction() syntax,
+and class variables have been adjusted to use private, protected, and public
+states. Please consult the doc/ folder for updated API documentation.
 
 ## Bugs squashed
 
@@ -8,7 +11,9 @@ phpArmory has been rewritten for PHP5 and the new OOP class syntax. The class in
 
 ## Features added
 
-* phpArmory5 and phpArmory5Cache will now make use of trigger_error provided by PHP5 to raise notices (E_USER_NOTICE), warnings (E_USER_WARNING), and errors (E_USER_ERROR).
+* phpArmory5 and phpArmory5Cache will now make use of trigger_error provided by
+  PHP5 to raise notices (E_USER_NOTICE), warnings (E_USER_WARNING), and errors
+  (E_USER_ERROR).
 
 ## Features changed
 
@@ -20,9 +25,13 @@ A pure bugfix release.
 
 ## Bugs squashed
 
-* phpArmory.class.php: Class will not be instantiated if the Curl or XML extension is missing from your PHP installation.
-* examples/character.php: Updated to use setArea. Properly dumps character data as XML. Please note that characterFetch() will now return the armory patchlevel, too.
-* examples/guildroster.php: Updated to use setArea. Properly dumps the full guild roster as plain table.
+* phpArmory.class.php: Class will not be instantiated if the Curl or XML
+  extension is missing from your PHP installation.
+* examples/character.php: Updated to use setArea. Properly dumps character data
+  as XML. Please note that characterFetch() will now return the armory
+  patchlevel, too.
+* examples/guildroster.php: Updated to use setArea. Properly dumps the full
+  guild roster as plain table.
 
 # 0.3.1 - “Unknown item” - Sep 28, 2008
 
@@ -30,9 +39,14 @@ A few features have been revised, a few new ones added.
 
 ## Features added
 
-* Patchlevel detection: getCurrentPatchlevel() will return the current patch version for the armory region you use.
-* Talent definitions: TalentDefinitionFetch() will retrieve talent definition for all classes from the World of Warcraft website.
-* WoW armory lockout prevention: with previous phpArmory versions, it could happen that your applications would be temporarily locked out from the armory. To prevent this, you can now limit the number of retries for XML pulling. To do this inherit your own classes like this:
+* Patchlevel detection: getCurrentPatchlevel() will return the current patch
+  version for the armory region you use.
+* Talent definitions: TalentDefinitionFetch() will retrieve talent definition
+  for all classes from the World of Warcraft website.
+* WoW armory lockout prevention: with previous phpArmory versions, it could
+  happen that your applications would be temporarily locked out from the
+  armory. To prevent this, you can now limit the number of retries for XML
+  pulling. To do this inherit your own classes like this:
   
   <?php
   $armoryFetch = new phpArmory ($armory = "http://www.wowarmory.com/", retries = 3);
@@ -40,7 +54,8 @@ A few features have been revised, a few new ones added.
 
 ## Features changed
 
-* Armory region and locales: this has been simplified, to only supply a setArea function to define which armory region we use.
+* Armory region and locales: this has been simplified, to only supply a setArea
+  function to define which armory region we use.
 
 # 0.3.0 - “Use soulstone” - Apr 30, 2008
 
@@ -48,11 +63,18 @@ Mostly bug fixes, a few new features.
 
 ## Features added
 
-* Language support. You now can define and query the language, in which you want to query data from the World of Warcraft armory.
-* Region support. You now can define a regions' armory to query data from it. This is especially helpful, if querying character data from different regions (e.g. US and EU characters).
+* Language support. You now can define and query the language, in which you
+  want to query data from the World of Warcraft armory.
+* Region support. You now can define a regions' armory to query data from it.
+  This is especially helpful, if querying character data from different regions
+  (e.g. US and EU characters).
 
 ## Bugs squashed
 
-* The xmlToArray method was not properly checking, if children of the XML objects are proper arrays.
+* The xmlToArray method was not properly checking, if children of the XML
+  objects are proper arrays.
 * Caching XML data retrieved from the World of Warcraft armory works again.
-* MySQL query results will now be stored correct. The cacheSave() method was not checking, if an XML result was already stored in the database, and thus produced a duplicate key error. Now existing XML results will be updated instead of inserted.
+* MySQL query results will now be stored correct. The cacheSave() method was
+  not checking, if an XML result was already stored in the database, and thus
+  produced a duplicate key error. Now existing XML results will be updated
+  instead of inserted.
