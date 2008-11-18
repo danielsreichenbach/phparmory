@@ -36,7 +36,7 @@ class phpArmory5 {
      * @access      private
      * @var         string      Contains the current versions' state.
      */
-    protected $version_state = "alpha";
+    protected $version_state = "rc-1";
 
     /**
      * The URL of the World of Warcraft armory website to be used.
@@ -135,7 +135,7 @@ class phpArmory5 {
     public function __construct($areaName = NULL, $downloadRetries = NULL) {
 
         if (!extension_loaded('curl') && !extension_loaded('xml')) {
-            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
+            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
         } else {
 
             // If an area is provided, we will configure armory site, wow site, and language appropriately.
@@ -195,9 +195,9 @@ class phpArmory5 {
                 break;
         }
 
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Area now is [" . $this->areaName . "].", E_USER_NOTICE);
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Armory now is [" . $this->armory . "].", E_USER_NOTICE);
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Wow site now is [" . $this->wow . "].", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Area now is [" . $this->areaName . "].", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Armory now is [" . $this->armory . "].", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Wow site now is [" . $this->wow . "].", E_USER_NOTICE);
 
         return TRUE;
     }
@@ -233,7 +233,7 @@ class phpArmory5 {
             }
         }
 
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Locale now is [" . $this->localeName . "].", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Locale now is [" . $this->localeName . "].", E_USER_NOTICE);
 
         return TRUE;
     }
@@ -268,12 +268,12 @@ class phpArmory5 {
             if (time() < $this->lastDownload+1) {
 
                 $delay = rand (1,2);
-                trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Inserting fetch delay of " . $delay . " seconds.", E_USER_NOTICE);
+                trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Inserting fetch delay of " . $delay . " seconds.", E_USER_NOTICE);
                 sleep($delay);    //random delay
 
             } // if
 
-            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
+            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
             $ch = curl_init();
             $timeout = $this->timeOut;
 
@@ -293,7 +293,7 @@ class phpArmory5 {
             $this->lastDownload = time();
 
             // Disabled reporting of the fetched content in error logs. This may spam your host. Only uncomment this line if you are working on localhost aka 127.0.0.1.
-            // trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Fetched content: " . $f, E_USER_NOTICE);
+            // trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetched content: " . $f, E_USER_NOTICE);
 
             curl_close($ch);
 
@@ -313,7 +313,7 @@ class phpArmory5 {
 
         }
 
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . " release): Fetched [" . $url . "] in " . $i . " tries.", E_USER_NOTICE);
+        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetched [" . $url . "] in " . $i . " tries.", E_USER_NOTICE);
         return array ( 'result' => TRUE, 'XmlData' => $f);
 
     }
@@ -536,9 +536,23 @@ class phpArmory5 {
      * @access      public
      * @param       int         $itemID                 The items' ID.
      * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
-     * @todo IMPLEMENTATION MISSING.
      */
     public function getItemData($itemID) {
+
+        $itemURL = $this->armory."item-tooltip.xml?i=".$itemID;
+
+        $itemXML = $this->getXmlData($itemURL);
+
+        if (is_array($itemXML) && array_key_exists('XmlData', $itemXML)) {
+
+            $itemArray = $this->convertXmlToArray($itemXML['XmlData']);
+
+            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetched item by ID [" . $itemID . "].", E_USER_NOTICE);
+
+            return $itemArray;
+        } else {
+            return FALSE;
+        }
 
     }
 
@@ -548,9 +562,43 @@ class phpArmory5 {
      * @param       string      $itemName               The items' name.
      * @param       string      $itemFilter             An associative array of search paramters.
      * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
-     * @todo IMPLEMENTATION MISSING.
      */
     public function getItemDataByName($itemName, $filter = NULL) {
+
+        $itemURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$itemName)."&searchType=items";
+
+        $itemsXML = $this->getXmlData($itemURL);
+
+        if (is_array($itemsXML) && array_key_exists('XmlData', $itemsXML)) {
+
+            $itemsArray = $this->convertXmlToArray($itemsXML['XmlData']);
+
+            $items = $itemsArray['armorysearch']['searchresults']['items']['item'];
+
+            if (!is_array($items[0])) {
+                $items = array($items);
+            }
+
+            foreach ($items as $x_item) {
+                if (strtolower($x_item['name']) == strtolower($itemName)) {
+                    $itemID = $x_item['id'];
+                    if ($filter==NULL) {
+                        return $this->getItemData($itemID);
+                    } elseif (is_array($filter)) {
+                        $x_item = $this->getItemData($itemID);
+                        $tooltip = $x_item['itemtooltip'];
+                        foreach ($filter as $attrib => $x_filter) {
+                            if ($tooltip[$attrib] != $x_filter) {
+                                unset($x_item); break;
+                            }
+                        }
+                        if ($x_item) return $x_item;
+                    }
+                }
+            }
+        } else {
+            return FALSE;
+        }
 
     }
 

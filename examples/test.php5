@@ -8,10 +8,12 @@
  */
 
 // Include the phpArmory class library
-require_once ('../phpArmory.class.php5');
+require_once ('../phpArmory.class.php');
 
-$euArea = 'eu';
-$usArea = 'us';
+$euArea     = 'eu';
+$usArea     = 'us';
+$itemID     = 19990;
+$itemName   = "Glimmering Naaru Sliver";
 
 // Instantiate the class library
 if ( $armory = new phpArmory5($areaName = $euArea) ) {
@@ -30,6 +32,11 @@ if ( $armory = new phpArmory5($areaName = $euArea) ) {
         echo "Armory site used now is \"" . $armoryAreaData[1] ."\".\n";
 
         echo "Web site used now is \"" . $armoryAreaData[2] ."\".\n";
+
+        $itemIDData = $armory->getItemData($itemID);
+
+        $itemNameData = $armory->getItemDataByName($itemName);
+
     }
 } else {
     echo "Could not create an instance of phpArmory5. Please consult your PHP5 logs.\n";
