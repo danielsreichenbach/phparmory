@@ -37,3 +37,14 @@ releases:
     - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
     - released
     - Last batch of bug fixes done.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: phpArmory 0.5.0
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2008-11-19 16:56:23.703286 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - created
+    - |-
+      The big cache rewrite release. PHP data objects, and improved file based
+      cache are wanted.
