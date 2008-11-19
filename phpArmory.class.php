@@ -135,7 +135,7 @@ class phpArmory5 {
     public function __construct($areaName = NULL, $downloadRetries = NULL) {
 
         if (!extension_loaded('curl') && !extension_loaded('xml')) {
-            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
+            self::triggerError("The PHP extensions \"curl\" and \"xml\" are required to use this class.");
         } else {
 
             // If an area is provided, we will configure armory site, wow site, and language appropriately.
@@ -195,9 +195,9 @@ class phpArmory5 {
                 break;
         }
 
-        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Area now is [" . $this->areaName . "].", E_USER_NOTICE);
-        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Armory now is [" . $this->armory . "].", E_USER_NOTICE);
-        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Wow site now is [" . $this->wow . "].", E_USER_NOTICE);
+        self::triggerNotice("Area now is [" . $this->areaName . "].");
+        self::triggerNotice("Armory now is [" . $this->armory . "].");
+        self::triggerNotice("Wow site now is [" . $this->wow . "].");
 
         return TRUE;
     }
@@ -235,7 +235,7 @@ class phpArmory5 {
                 $this->localeName = 'en';
         }
 
-        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Locale now is [" . $this->localeName . "].", E_USER_NOTICE);
+        self::triggerNotice("Locale now is [" . $this->localeName . "].");
 
         return TRUE;
     }
@@ -270,12 +270,12 @@ class phpArmory5 {
             if (time() < $this->lastDownload+1) {
 
                 $delay = rand (1,2);
-                trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Inserting fetch delay of " . $delay . " seconds.", E_USER_NOTICE);
+                self::triggerNotice("Inserting fetch delay of " . $delay . " seconds.");
                 sleep($delay);    //random delay
 
             } // if
 
-            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
+            self::triggerNotice("Fetching [" . $url . "] (tries: #" . $i . ").");
             $ch = curl_init();
             $timeout = $this->timeOut;
 
@@ -315,7 +315,7 @@ class phpArmory5 {
 
         }
 
-        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetched [" . $url . "] in " . $i . " tries.", E_USER_NOTICE);
+        self::triggerNotice("Fetched [" . $url . "] in " . $i . " tries.");
         return array ( 'result' => TRUE, 'XmlData' => $f);
 
     }
@@ -426,6 +426,31 @@ class phpArmory5 {
 
         return ($includeTopTag ? $xmlArray : reset($xmlArray));
 
+    }
+
+    /**
+     * Raise a PHP error.
+     * @access      protected
+     * @param       string       $userError              The error string to output.
+     */
+    protected function triggerError ($userError = NULL) {
+        if (is_string($userError)) {
+            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": " . $userError, E_USER_ERROR);
+        }
+    }
+
+    /**
+     * Raise a PHP notice if the class is used from the command line.
+     * @access      protected
+     * @param       string       $userNotice             The notice string to output.
+     */
+    protected function triggerNotice ($userNotice = NULL) {
+        if (is_string($userNotice)) {
+            $sapi_type = substr(php_sapi_name(), 0, 3);
+            if ($sapi_type == 'cli') {
+                trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": " . $userNotice, E_USER_NOTICE);
+            }
+        }
     }
 
     /**
@@ -628,7 +653,7 @@ class phpArmory5 {
 
             $itemArray = $this->convertXmlToArray($itemXML['XmlData']);
 
-            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetched item by ID [" . $itemID . "].", E_USER_NOTICE);
+            self::triggerNotice("Fetched item by ID [" . $itemID . "].");
 
             return $itemArray;
         } else {
