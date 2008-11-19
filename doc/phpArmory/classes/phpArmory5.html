@@ -154,27 +154,27 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">mixed</span>
+											<span class="method-result">array</span>
 										<a href="#getArenaTeamData" title="details" class="method-name">getArenaTeamData</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$arenaTeamName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$arenaName</span>)
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$arenaTeamName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span> = <span class="var-default">NULL</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$arenaName</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">mixed</span>
+											<span class="method-result">array</span>
 										<a href="#getCharacterData" title="details" class="method-name">getCharacterData</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$characterName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span>)
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$characterName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
-											<span class="method-result">string</span>
+											<span class="method-result">array</span>
 										<a href="#getCharacterIconURL" title="details" class="method-name">getCharacterIconURL</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$characterInfo</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">mixed</span>
+											<span class="method-result">array</span>
 										<a href="#getGuildData" title="details" class="method-name">getGuildData</a>
 											([<span class="var-type">string</span>&nbsp;<span class="var-name">$guildName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
-											<span class="method-result">mixed</span>
+											<span class="method-result">array</span>
 										<a href="#getItemData" title="details" class="method-name">getItemData</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$itemID</span>)
 									</div>
@@ -194,12 +194,12 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">mixed</span>
+											<span class="method-result">array</span>
 										<a href="#getTalentData" title="details" class="method-name">getTalentData</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">mixed</span>
+											<span class="method-result">array</span>
 										<a href="#getXmlData" title="details" class="method-name">getXmlData</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$userAgent</span> = <span class="var-default">NULL</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$timeOut</span> = <span class="var-default">NULL</span>], <span class="var-type">integer</span>&nbsp;<span class="var-name">$timeout</span>)
 									</div>
@@ -556,7 +556,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">convertXmlToArray</span> (line <span class="line-number">329</span>)
+		<span class="method-title">convertXmlToArray</span> (line <span class="line-number">331</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -617,23 +617,23 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getArenaTeamData</span> (line <span class="line-number">495</span>)
+		<span class="method-title">getArenaTeamData</span> (line <span class="line-number">497</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides information on a specific arena team.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and arenaTeamData if $arenaTeamName and $realmName are valid, otherwise FALSE and errorMessage.</li>
+				<li><span class="field">return:</span> Returns an array containing arenaTeamData if $arenaTeamName and $realmName are valid, otherwise FALSE.</li>
 				<li><span class="field">todo:</span> IMPLEMENTATION MISSING.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getArenaTeamData
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$arenaTeamName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$arenaName</span>)
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$arenaTeamName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span> = <span class="var-default">NULL</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$arenaName</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -654,23 +654,22 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCharacterData</span> (line <span class="line-number">507</span>)
+		<span class="method-title">getCharacterData</span> (line <span class="line-number">514</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides information on a specific character.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and characterData if $characterName and $realmName are valid, otherwise FALSE and errorMessage.</li>
-				<li><span class="field">todo:</span> IMPLEMENTATION MISSING.</li>
+				<li><span class="field">return:</span> Returns an array containing characterData if $characterName and $realmName are valid, otherwise FALSE.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getCharacterData
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$characterName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span>)
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$characterName</span> = <span class="var-default">NULL</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$realmName</span> = <span class="var-default">NULL</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -688,19 +687,18 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCharacterIconURL</span> (line <span class="line-number">518</span>)
+		<span class="method-title">getCharacterIconURL</span> (line <span class="line-number">565</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides the link to the matching portrait icon for a charater.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and characterIconURL if $characterInfo is valid, otherwise FALSE and errorMessage.</li>
-				<li><span class="field">todo:</span> IMPLEMENTATION MISSING.</li>
+				<li><span class="field">return:</span> Returns an array containing characterIconURL if $characterInfo is valid, otherwise FALSE.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">string</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getCharacterIconURL
 		</span>
@@ -710,7 +708,7 @@
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
-				<span class="var-name">$characterInfo</span><span class="var-description">: The characterinfo array returned by self::getCharacterData.</span>			</li>
+				<span class="var-name">$characterInfo</span><span class="var-description">: The ['characterinfo']['character'] array returned by getCharacterData.</span>			</li>
 				</ul>
 		
 			
@@ -719,19 +717,18 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getGuildData</span> (line <span class="line-number">530</span>)
+		<span class="method-title">getGuildData</span> (line <span class="line-number">584</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides information on a specific guild.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and characterData if $guildName and $realmName are valid, otherwise FALSE and errorMessage.</li>
-				<li><span class="field">todo:</span> IMPLEMENTATION MISSING.</li>
+				<li><span class="field">return:</span> Returns an array containing guildData if $guildName and $realmName are valid, otherwise FALSE.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getGuildData
 		</span>
@@ -753,18 +750,18 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getItemData</span> (line <span class="line-number">540</span>)
+		<span class="method-title">getItemData</span> (line <span class="line-number">615</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides information on a specific item by querying its' ID.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.</li>
+				<li><span class="field">return:</span> Returns an array containing itemData if $itemID is valid, otherwise FALSE.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getItemData
 		</span>
@@ -783,13 +780,13 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getItemDataByName</span> (line <span class="line-number">566</span>)
+		<span class="method-title">getItemDataByName</span> (line <span class="line-number">641</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides information on a specific item by querying its' name.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.</li>
+				<li><span class="field">return:</span> Returns an array containing itemData if $itemName is valid, otherwise FALSE.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -844,7 +841,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getPatchLevel</span> (line <span class="line-number">434</span>)
+		<span class="method-title">getPatchLevel</span> (line <span class="line-number">436</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -869,18 +866,18 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTalentData</span> (line <span class="line-number">465</span>)
+		<span class="method-title">getTalentData</span> (line <span class="line-number">467</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Provides information on the current talent tree definitions used by all character classes World of Warcraft.</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Returns an array containing TRUE and TalentDefinitions, otherwise FALSE and errorMessage.</li>
+				<li><span class="field">return:</span> Returns an array containing TalentDefinitions, otherwise FALSE.</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getTalentData
 		</span>
@@ -894,7 +891,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getXmlData</span> (line <span class="line-number">249</span>)
+		<span class="method-title">getXmlData</span> (line <span class="line-number">251</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -904,7 +901,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">mixed</span>
+		<span class="method-result">array</span>
 		<span class="method-name">
 			getXmlData
 		</span>
@@ -994,7 +991,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 18 Nov 2008 11:03:00 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+		Documentation generated on Wed, 19 Nov 2008 17:25:12 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
 	</p>
 	</div></body>
 </html>

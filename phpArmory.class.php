@@ -135,7 +135,7 @@ class phpArmory5 {
     public function __construct($areaName = NULL, $downloadRetries = NULL) {
 
         if (!extension_loaded('curl') && !extension_loaded('xml')) {
-            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
+            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": The PHP extensions \"curl\" and \"xml\" are required to use this class.", E_USER_ERROR);
         } else {
 
             // If an area is provided, we will configure armory site, wow site, and language appropriately.
@@ -195,9 +195,9 @@ class phpArmory5 {
                 break;
         }
 
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Area now is [" . $this->areaName . "].", E_USER_NOTICE);
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Armory now is [" . $this->armory . "].", E_USER_NOTICE);
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Wow site now is [" . $this->wow . "].", E_USER_NOTICE);
+        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Area now is [" . $this->areaName . "].", E_USER_NOTICE);
+        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Armory now is [" . $this->armory . "].", E_USER_NOTICE);
+        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Wow site now is [" . $this->wow . "].", E_USER_NOTICE);
 
         return TRUE;
     }
@@ -231,9 +231,11 @@ class phpArmory5 {
             } else {
                 $this->localeName = 'en';
             }
+        } else {
+                $this->localeName = 'en';
         }
 
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Locale now is [" . $this->localeName . "].", E_USER_NOTICE);
+        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Locale now is [" . $this->localeName . "].", E_USER_NOTICE);
 
         return TRUE;
     }
@@ -244,7 +246,7 @@ class phpArmory5 {
      * @param       string      $url                    URL of the page to fetch data from.
      * @param       string      $userAgent              The user agent making the GET request.
      * @param       integer     $timeout                The connection timeout in seconds.
-     * @return      mixed       $result                 Returns TRUE if $url is valid, and could be fetched. Returns FALSE and an error string, if $url is not valid.
+     * @return      array       $result                 Returns TRUE if $url is valid, and could be fetched. Returns FALSE and an error string, if $url is not valid.
      */
     protected function getXmlData($url, $userAgent = NULL, $timeOut = NULL) {
 
@@ -268,12 +270,12 @@ class phpArmory5 {
             if (time() < $this->lastDownload+1) {
 
                 $delay = rand (1,2);
-                trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Inserting fetch delay of " . $delay . " seconds.", E_USER_NOTICE);
+                trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Inserting fetch delay of " . $delay . " seconds.", E_USER_NOTICE);
                 sleep($delay);    //random delay
 
             } // if
 
-            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
+            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetching [" . $url . "] (tries: #" . $i . ").", E_USER_NOTICE);
             $ch = curl_init();
             $timeout = $this->timeOut;
 
@@ -293,7 +295,7 @@ class phpArmory5 {
             $this->lastDownload = time();
 
             // Disabled reporting of the fetched content in error logs. This may spam your host. Only uncomment this line if you are working on localhost aka 127.0.0.1.
-            // trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetched content: " . $f, E_USER_NOTICE);
+            // trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetched content: " . $f, E_USER_NOTICE);
 
             curl_close($ch);
 
@@ -313,7 +315,7 @@ class phpArmory5 {
 
         }
 
-        trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetched [" . $url . "] in " . $i . " tries.", E_USER_NOTICE);
+        trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetched [" . $url . "] in " . $i . " tries.", E_USER_NOTICE);
         return array ( 'result' => TRUE, 'XmlData' => $f);
 
     }
@@ -460,7 +462,7 @@ class phpArmory5 {
     /**
      * Provides information on the current talent tree definitions used by all character classes World of Warcraft.
      * @access      public
-     * @return      mixed       $result                 Returns an array containing TRUE and TalentDefinitions, otherwise FALSE and errorMessage.
+     * @return      array       $result                 Returns an array containing TalentDefinitions, otherwise FALSE.
      */
     public function getTalentData() {
         $classes = array (
@@ -489,10 +491,16 @@ class phpArmory5 {
      * @access      public
      * @param       string      $arenaName              The arena teams' name.
      * @param       string      $realmName              The arena teams' realm name.
-     * @return      mixed       $result                 Returns an array containing TRUE and arenaTeamData if $arenaTeamName and $realmName are valid, otherwise FALSE and errorMessage.
+     * @return      array       $result                 Returns an array containing arenaTeamData if $arenaTeamName and $realmName are valid, otherwise FALSE.
      * @todo IMPLEMENTATION MISSING.
      */
-    public function getArenaTeamData($arenaTeamName, $realmName) {
+    public function getArenaTeamData($arenaTeamName = NULL, $realmName = NULL) {
+
+        if (is_string($arenaTeamName) && is_string($realmName)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
 
     }
 
@@ -501,21 +509,68 @@ class phpArmory5 {
      * @access      public
      * @param       string      $characterName          The characters' name.
      * @param       string      $realmName              The characters' realm name.
-     * @return      mixed       $result                 Returns an array containing TRUE and characterData if $characterName and $realmName are valid, otherwise FALSE and errorMessage.
-     * @todo IMPLEMENTATION MISSING.
+     * @return      array       $result                 Returns an array containing characterData if $characterName and $realmName are valid, otherwise FALSE.
      */
-    public function getCharacterData($characterName, $realmName) {
+    public function getCharacterData($characterName = NULL, $realmName = NULL) {
 
+        if (is_string($characterName) && is_string($realmName)) {
+            $characterName  = ucfirst($characterName);
+            $realmName      = ucfirst($realmName);
+
+            $armoryBaseURL = $this->armory."character-";
+            $armoryBaseURLEnd = ".xml?r=".urlencode($realmName)."&n=".urlencode($characterName);
+
+            $characterXML = $this->getXmlData($armoryBaseURL . "sheet" . $armoryBaseURLEnd);
+
+            if (is_array($characterXML) && array_key_exists('XmlData', $characterXML)) {
+                $characterArray = $this->convertXmlToArray($characterXML['XmlData']);
+
+                $characterPages = array("reputation", "skills", "talents");
+                foreach ($characterPages as $characterPage) {
+                    $tempXML = $this->getXmlData($armoryBaseURL . $characterPage . $armoryBaseURLEnd);
+                    if (is_array($tempXML) && array_key_exists('XmlData', $tempXML)) {
+                        $tempArray = $this->convertXmlToArray($tempXML['XmlData']);
+
+                        // remove character info from array
+                        unset($tempArray['characterinfo']['character']);
+
+                        // merge the data received from $armoryBaseURL . $characterPage . $armoryBaseURLEnd into characterArray
+                        $characterArray = array_merge($characterArray, reset($tempArray));
+                    } else {
+                        return FALSE;
+                    }
+                }
+
+                // retrieve the current patch level
+                $patchlevel["armorypatchlevel"] = $this->getPatchLevel();
+
+                // merge patch level into characterArray
+                $characterArray = array_merge($characterArray, $patchlevel);
+
+                return $characterArray;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
     }
 
     /**
      * Provides the link to the matching portrait icon for a charater.
      * @access      public
-     * @param       array       $characterInfo          The characterinfo array returned by self::getCharacterData.
-     * @return      string      $result                 Returns an array containing TRUE and characterIconURL if $characterInfo is valid, otherwise FALSE and errorMessage.
-     * @todo IMPLEMENTATION MISSING.
+     * @param       array       $characterInfo          The ['characterinfo']['character'] array returned by getCharacterData.
+     * @return      array       $result                 Returns an array containing characterIconURL if $characterInfo is valid, otherwise FALSE.
      */
-    public function getCharacterIconURL() {
+    public function getCharacterIconURL($characterInfo) {
+
+        if (is_array($characterInfo) && array_key_exists('level', $characterInfo) && array_key_exists('genderid', $characterInfo) && array_key_exists('raceid', $characterInfo) && array_key_exists('classid', $characterInfo)) {
+
+            $dir = "wow" . ($characterInfo['level'] < 60 ? "-default" : ($characterInfo['level'] < 80 ? "-70" : "-80"));
+            return $this->armory."images/portraits/$dir/{$characterInfo['genderid']}-{$characterInfo['raceid']}-{$characterInfo['classid']}.gif";
+        } else {
+            return FALSE;
+        }
 
     }
 
@@ -524,10 +579,30 @@ class phpArmory5 {
      * @access      public
      * @param       string      $guildName              The guilds' name.
      * @param       string      $realmName              The guilds' realm name.
-     * @return      mixed       $result                 Returns an array containing TRUE and characterData if $guildName and $realmName are valid, otherwise FALSE and errorMessage.
-     * @todo IMPLEMENTATION MISSING.
+     * @return      array       $result                 Returns an array containing guildData if $guildName and $realmName are valid, otherwise FALSE.
      */
     public function getGuildData($guildName = NULL, $realmName = NULL) {
+
+        if (is_string($guildName) && is_string($realmName)) {
+            $guildName  = ucfirst($guildName);
+            $realmName  = ucfirst($realmName);
+
+            $guildName  = str_replace(" ", "+",$guildName);
+            $realmName  = str_replace(" ", "+",$realmName);
+
+            $armoryURL = $this->armory."guild-info.xml?r=" . urlencode($realmName) . "&n=" . urlencode($guildName);
+
+            $guildXML = $this->getXmlData($armoryURL);
+
+            if (is_array($guildXML) && array_key_exists('XmlData', $guildXML)) {
+                $guildArray = $this->convertXmlToArray($guildXML['XmlData']);
+                return $guildArray;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
 
     }
 
@@ -535,7 +610,7 @@ class phpArmory5 {
      * Provides information on a specific item by querying its' ID.
      * @access      public
      * @param       int         $itemID                 The items' ID.
-     * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
+     * @return      array       $result                 Returns an array containing itemData if $itemID is valid, otherwise FALSE.
      */
     public function getItemData($itemID) {
 
@@ -547,7 +622,7 @@ class phpArmory5 {
 
             $itemArray = $this->convertXmlToArray($itemXML['XmlData']);
 
-            trigger_error("phpArmory (version " . $this->version . " - " . $this->version_state . "): Fetched item by ID [" . $itemID . "].", E_USER_NOTICE);
+            trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": Fetched item by ID [" . $itemID . "].", E_USER_NOTICE);
 
             return $itemArray;
         } else {
@@ -561,7 +636,7 @@ class phpArmory5 {
      * @access      public
      * @param       string      $itemName               The items' name.
      * @param       string      $itemFilter             An associative array of search paramters.
-     * @return      mixed       $result                 Returns an array containing TRUE and itemData if $itemID is valid, otherwise FALSE and errorMessage.
+     * @return      mixed       $result                 Returns an array containing itemData if $itemName is valid, otherwise FALSE.
      */
     public function getItemDataByName($itemName, $filter = NULL) {
 
