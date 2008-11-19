@@ -517,6 +517,8 @@ class phpArmory5 {
             $characterName  = ucfirst($characterName);
             $realmName      = ucfirst($realmName);
 
+            $realmName  = str_replace(" ", "+",$realmName);
+
             $armoryBaseURL = $this->armory."character-";
             $armoryBaseURLEnd = ".xml?r=".urlencode($realmName)."&n=".urlencode($characterName);
 
