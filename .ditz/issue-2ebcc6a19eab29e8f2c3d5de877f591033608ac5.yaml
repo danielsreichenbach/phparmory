@@ -7,8 +7,8 @@ type: :task
 component: Documentation
 release: phpArmory 0.4.0
 reporter: Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-09-29 10:32:08.320548 Z
 references: []
 
@@ -30,3 +30,13 @@ log_events:
     The API for the PHP5 conversion requires a few more changes to make the
     classes really OOP, thus API documentation will be rewritten or - mostly -
     be written from scratch.
+- - 2008-11-19 16:33:31.970329 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - closed with disposition fixed
+  - |-
+    Class documentation is complete now.
+    
+    The changed API is fully documented with phpDocumenter 1.4.2 compatible
+    phpDoc comments. Generating a nice API reference is done by running
+    phpdoc -f phpArmory.class.php,phpArmoryCache.class.php -t doc/
+    in the source directory.

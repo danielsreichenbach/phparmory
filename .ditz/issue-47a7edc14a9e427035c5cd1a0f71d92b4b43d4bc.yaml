@@ -9,8 +9,8 @@ type: :task
 component: phparmory
 release: phpArmory 0.4.0
 reporter: Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-09-29 10:30:09.541958 Z
 references: []
 
@@ -28,3 +28,10 @@ log_events:
   - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - changed status from unstarted to in_progress
   - Added class templates for both non-caching and caching class.
+- - 2008-11-19 16:34:51.421505 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - closed with disposition fixed
+  - |-
+    Both the phpArmory5 and the phpArmory5Cache class now make use of the
+    new OOP features offered by PHP5. Using phpArmory thus now requires
+    PHP5.

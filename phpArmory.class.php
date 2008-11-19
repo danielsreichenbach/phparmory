@@ -497,6 +497,10 @@ class phpArmory5 {
     public function getArenaTeamData($arenaTeamName = NULL, $realmName = NULL) {
 
         if (is_string($arenaTeamName) && is_string($realmName)) {
+            $realmName  = ucfirst($realmName);
+
+            $arenaTeamName  = str_replace(" ", "+",$arenaTeamName);
+            $realmName  = str_replace(" ", "+",$realmName);
             return TRUE;
         } else {
             return FALSE;
