@@ -15,8 +15,8 @@ components:
 releases: 
 - !ditz.rubyforge.org,2008-03-06/release 
   name: phpArmory 0.4.0
-  status: :unreleased
-  release_time: 
+  status: :released
+  release_time: 2008-11-20 11:05:22.214190 Z
   log_events: 
   - - 2008-09-29 10:33:34.074704 Z
     - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
@@ -24,6 +24,10 @@ releases:
     - |-
       phpArmory 0.4.0 should include the class conversion to PHP5 classes,
       and complete API documentation for phpArmory and phpArmoryCache.
+  - - 2008-11-20 11:05:22.214219 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - released
+    - Done, and ready for public consumption.
 - !ditz.rubyforge.org,2008-03-06/release 
   name: phpArmory 0.3.2
   status: :released

@@ -3,7 +3,7 @@ title: Arena teams
 desc: Add functions to fetch arena data from the armory.
 type: :feature
 component: phpArmory class
-release: phpArmory 0.4.0
+release: phpArmory 0.5.0
 reporter: Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
 status: :in_progress
 disposition: 
@@ -24,3 +24,7 @@ log_events:
   - Daniel S. Reichenbach <daniel.s.reichenbach@mac.com>
   - changed status from unstarted to in_progress
   - Researching format of the arena team xml responses.
+- - 2008-11-20 11:05:07.287399 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - assigned to release phpArmory 0.5.0 from phpArmory 0.4.0
+  - ""
