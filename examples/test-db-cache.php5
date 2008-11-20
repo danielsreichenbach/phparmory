@@ -23,7 +23,7 @@ $guildName          = "Divinitas";
 $guildRealmName     = "Madmortem";
 
 // Instantiate the class library
-if ( $armory = new phpArmory5Cache($areaName = $euArea, $dataStore = "mysql", $dataPath = "armory_cache", $mysqlString = "mysql://marenkay:Kloaj1977@localhost/marenkay") ) {
+if ( $armory = new phpArmory5Cache($areaName = $euArea, $dataStore = "mysql", $dataPath = "armory_cache", $mysqlString = "mysql://username:password@localhost/databasename") ) {
     echo "We have created an instance of phpArmory5Cache with the area \"" . $euArea ."\" and data storage in mysql selected.\n";
 
     $armoryAreaData = $armory->getArea();
