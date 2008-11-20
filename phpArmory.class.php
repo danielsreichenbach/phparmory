@@ -25,7 +25,7 @@ class phpArmory5 {
 
     /**
      * Current version of the phpArmory5 class.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the current class version.
      */
     protected $version = "0.4.0";
@@ -33,35 +33,35 @@ class phpArmory5 {
     /**
      * Current state of the phpArmory5 class. Allowed values are alpha, beta,
      * and release.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the current versions' state.
      */
-    protected $version_state = "rc-1";
+    protected $version_state = "release";
 
     /**
      * The URL of the World of Warcraft armory website to be used.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the URL of the armory website.
      */
     protected $armory = "http://www.wowarmory.com/";
 
     /**
      * The URL of the World of Warcraft website to be used.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the URL of the World of Warcraft website.
      */
     protected $wow = "http://www.worldofwarcraft.com/";
 
     /**
      * The armory area to send requests to.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the area / region to be used.
      */
     protected $areaName = "us";
 
     /**
      * The locale used to send requests.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the locale used to send requests.
      */
     protected $localeName = "en";
@@ -75,7 +75,7 @@ class phpArmory5 {
 
     /**
      * The case sensitive name of a arena team.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the case sensitive name of a arena team.
      */
     private $arenaTeam = "";
@@ -96,7 +96,7 @@ class phpArmory5 {
 
     /**
      * The default user agent for making HTTP requests.
-     * @access      private
+     * @access      protected
      * @var         string      Contains the user agent string used to query the armory.
      */
     protected $userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11";
@@ -105,7 +105,7 @@ class phpArmory5 {
      * The amount of time in seconds after which to consider a connection timed
      * out if no data has been yet retrieved.
      * received.
-     * @access      private
+     * @access      protected
      * @var         integer     Contains the nr# of seconds to wait between connection tries.
      */
     protected $timeOut = 5;
@@ -440,6 +440,20 @@ class phpArmory5 {
     }
 
     /**
+     * Raise a PHP warning if the class is used from the command line.
+     * @access      protected
+     * @param       string       $userWarning            The warning string to output.
+     */
+    protected function triggerWarning ($userWarning = NULL) {
+        if (is_string($userWarning)) {
+            $sapi_type = substr(php_sapi_name(), 0, 3);
+            if ($sapi_type == 'cli') {
+                trigger_error("phpArmory " . $this->version . " - " . $this->version_state . ": " . $userWarning, E_USER_WARNING);
+            }
+        }
+    }
+
+    /**
      * Raise a PHP notice if the class is used from the command line.
      * @access      protected
      * @param       string       $userNotice             The notice string to output.
@@ -645,21 +659,24 @@ class phpArmory5 {
      */
     public function getItemData($itemID) {
 
-        $itemURL = $this->armory."item-tooltip.xml?i=".$itemID;
+        if (is_numeric($itemID)) {
+            $itemURL = $this->armory."item-tooltip.xml?i=".$itemID;
 
-        $itemXML = $this->getXmlData($itemURL);
+            $itemXML = $this->getXmlData($itemURL);
 
-        if (is_array($itemXML) && array_key_exists('XmlData', $itemXML)) {
+            if (is_array($itemXML) && array_key_exists('XmlData', $itemXML)) {
 
-            $itemArray = $this->convertXmlToArray($itemXML['XmlData']);
+                $itemArray = $this->convertXmlToArray($itemXML['XmlData']);
 
-            self::triggerNotice("Fetched item by ID [" . $itemID . "].");
+                self::triggerNotice("Fetched item by ID [" . $itemID . "].");
 
-            return $itemArray;
+                return $itemArray;
+            } else {
+                return FALSE;
+            }
         } else {
             return FALSE;
         }
-
     }
 
     /**
@@ -671,36 +688,40 @@ class phpArmory5 {
      */
     public function getItemDataByName($itemName, $filter = NULL) {
 
-        $itemURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$itemName)."&searchType=items";
+        if (is_string($itemName)) {
+            $itemURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$itemName)."&searchType=items";
 
-        $itemsXML = $this->getXmlData($itemURL);
+            $itemsXML = $this->getXmlData($itemURL);
 
-        if (is_array($itemsXML) && array_key_exists('XmlData', $itemsXML)) {
+            if (is_array($itemsXML) && array_key_exists('XmlData', $itemsXML)) {
 
-            $itemsArray = $this->convertXmlToArray($itemsXML['XmlData']);
+                $itemsArray = $this->convertXmlToArray($itemsXML['XmlData']);
 
-            $items = $itemsArray['armorysearch']['searchresults']['items']['item'];
+                $items = $itemsArray['armorysearch']['searchresults']['items']['item'];
 
-            if (!is_array($items[0])) {
-                $items = array($items);
-            }
+                if (!is_array($items[0])) {
+                    $items = array($items);
+                }
 
-            foreach ($items as $x_item) {
-                if (strtolower($x_item['name']) == strtolower($itemName)) {
-                    $itemID = $x_item['id'];
-                    if ($filter==NULL) {
-                        return $this->getItemData($itemID);
-                    } elseif (is_array($filter)) {
-                        $x_item = $this->getItemData($itemID);
-                        $tooltip = $x_item['itemtooltip'];
-                        foreach ($filter as $attrib => $x_filter) {
-                            if ($tooltip[$attrib] != $x_filter) {
-                                unset($x_item); break;
+                foreach ($items as $x_item) {
+                    if (strtolower($x_item['name']) == strtolower($itemName)) {
+                        $itemID = $x_item['id'];
+                        if ($filter==NULL) {
+                            return $this->getItemData($itemID);
+                        } elseif (is_array($filter)) {
+                            $x_item = $this->getItemData($itemID);
+                            $tooltip = $x_item['itemtooltip'];
+                            foreach ($filter as $attrib => $x_filter) {
+                                if ($tooltip[$attrib] != $x_filter) {
+                                    unset($x_item); break;
+                                }
                             }
+                            if ($x_item) return $x_item;
                         }
-                        if ($x_item) return $x_item;
                     }
                 }
+            } else {
+                return FALSE;
             }
         } else {
             return FALSE;
