@@ -1,23 +1,39 @@
-# 0.4.0 - “Jack-o’-Lantern” - ??? ??, 2008
+# 0.4.0 - “Jack-o’-Lantern” - Nov 20, 2008
 
 phpArmory has been rewritten for PHP5 and the new OOP class syntax. The class
 interfaces have been changed to use getFunction() and setFunction() syntax,
 and class variables have been adjusted to use private, protected, and public
 states. Please consult the doc/ folder for updated API documentation.
 
+NOTE: arena team handling has been postponed to release 0.5.0, as with the
+recent release of Wrath of the Lich King, all arena teams have been wiped and
+no sample data was available to develop the feature.
+
 ## Bugs squashed
 
-* 
+* all functions have received input checking, now all functions will properly
+  return FALSE when something goes wrong.
 
 ## Features added
 
 * phpArmory5 and phpArmory5Cache will now make use of trigger_error provided by
   PHP5 to raise notices (E_USER_NOTICE), warnings (E_USER_WARNING), and errors
-  (E_USER_ERROR).
+  (E_USER_ERROR). Please note that warnings and notices will only be raised when
+  you use phpArmory from the command line. If you use it on your web server,
+  only errors will be raised.
+* you can now use getArea / setArea to make changes to the armory area.
+* you can now use getLocale / setLocale to set the language in which you want
+  to query data from the armory.
+* you can retrieve talent definitions for all classes, including the recently
+  added Death Knight using getTalentData().
 
 ## Features changed
 
-* 
+* the phpArmory class API has been changed. All functions now use get... and
+  set... for their names. The current API documentation is available online:
+  http://www.marenkay.com/wp-content/plugins/wow-armory/phparmory/doc/
+* character icons will now be properly display for characters up to level 80.
+  We have shiny WotLK character icons.
 
 # 0.3.2 - “Giddyup!” - Oct 02, 2008
 
@@ -47,7 +63,7 @@ A few features have been revised, a few new ones added.
   happen that your applications would be temporarily locked out from the
   armory. To prevent this, you can now limit the number of retries for XML
   pulling. To do this inherit your own classes like this:
-  
+
   <?php
   $armoryFetch = new phpArmory ($armory = "http://www.wowarmory.com/", retries = 3);
   ?>
