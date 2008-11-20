@@ -139,11 +139,6 @@
 											([<span class="var-type">string</span>&nbsp;<span class="var-name">$areaName</span> = <span class="var-default">NULL</span>], [<span class="var-type">int</span>&nbsp;<span class="var-name">$downloadRetries</span> = <span class="var-default">NULL</span>])
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#__destruct" title="details" class="method-name">__destruct</a>
-										()
-									</div>
-																<div class="method-definition">
 											<span class="method-result">array</span>
 										<a href="#convertXmlToArray" title="details" class="method-name">&amp;convertXmlToArray</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$xmlData</span>, [<span class="var-type">bool</span>&nbsp;<span class="var-name">$includeTopTag</span> = <span class="var-default">FALSE</span>], [<span class="var-type">bool</span>&nbsp;<span class="var-name">$lowerCaseTags</span> = <span class="var-default">TRUE</span>])
@@ -222,6 +217,11 @@
 											<span class="method-result">void</span>
 										<a href="#triggerNotice" title="details" class="method-name">triggerNotice</a>
 											([<span class="var-type">string</span>&nbsp;<span class="var-name">$userNotice</span> = <span class="var-default">NULL</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#triggerWarning" title="details" class="method-name">triggerWarning</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$userWarning</span> = <span class="var-default">NULL</span>])
 									</div>
 								</div>
 		</div>
@@ -423,6 +423,14 @@
 	
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#var$version">phpArmory5Cache::$version</a>
+								: Current version of the phpArmory5Cache class.
+							</li>
+				</ul>
 		
 
 </div>
@@ -433,7 +441,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$version_state</span>
-			 = <span class="var-default"> &quot;rc-1&quot;</span>			(line <span class="line-number">39</span>)
+			 = <span class="var-default"> &quot;release&quot;</span>			(line <span class="line-number">39</span>)
 		</span>
 	</div>
 
@@ -446,6 +454,14 @@
 	
 	
 		
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#var$version_state">phpArmory5Cache::$version_state</a>
+								: Current state of the phpArmory5Cache class. Allowed values are alpha, beta,  and release.
+							</li>
+				</ul>
 		
 
 </div>
@@ -530,43 +546,11 @@
 							</li>
 				</ul>
 	</div>
-<a name="method__destruct" id="__destruct"><!-- --></a>
+<a name="methodconvertXmlToArray" id="convertXmlToArray"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">160</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">phpArmory5 destructor.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			__destruct
-		</span>
-				()
-			</div>
-	
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../../phpArmory/classes/phpArmory5Cache.html#method__destruct">phpArmory5Cache::__destruct()</a>
-								: phpArmory5Cache destructor.
-							</li>
-				</ul>
-	</div>
-<a name="methodconvertXmlToArray" id="convertXmlToArray"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">convertXmlToArray</span> (line <span class="line-number">331</span>)
+		<span class="method-title">convertXmlToArray</span> (line <span class="line-number">323</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -599,10 +583,10 @@
 			
 	</div>
 <a name="methodgetArea" id="getArea"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getArea</span> (line <span class="line-number">169</span>)
+		<span class="method-title">getArea</span> (line <span class="line-number">161</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -624,10 +608,10 @@
 			
 	</div>
 <a name="methodgetArenaTeamData" id="getArenaTeamData"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getArenaTeamData</span> (line <span class="line-number">522</span>)
+		<span class="method-title">getArenaTeamData</span> (line <span class="line-number">528</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -659,12 +643,20 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodgetArenaTeamData">phpArmory5Cache::getArenaTeamData()</a>
+								: Provides information on a specific arena team.
+							</li>
+				</ul>
 	</div>
 <a name="methodgetCharacterData" id="getCharacterData"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCharacterData</span> (line <span class="line-number">543</span>)
+		<span class="method-title">getCharacterData</span> (line <span class="line-number">549</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -692,12 +684,20 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodgetCharacterData">phpArmory5Cache::getCharacterData()</a>
+								: Provides information on a specific character.
+							</li>
+				</ul>
 	</div>
 <a name="methodgetCharacterIconURL" id="getCharacterIconURL"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCharacterIconURL</span> (line <span class="line-number">596</span>)
+		<span class="method-title">getCharacterIconURL</span> (line <span class="line-number">602</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -724,10 +724,10 @@
 			
 	</div>
 <a name="methodgetGuildData" id="getGuildData"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getGuildData</span> (line <span class="line-number">615</span>)
+		<span class="method-title">getGuildData</span> (line <span class="line-number">621</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -755,12 +755,20 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodgetGuildData">phpArmory5Cache::getGuildData()</a>
+								: Provides information on a specific guild.
+							</li>
+				</ul>
 	</div>
 <a name="methodgetItemData" id="getItemData"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getItemData</span> (line <span class="line-number">646</span>)
+		<span class="method-title">getItemData</span> (line <span class="line-number">652</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -785,12 +793,20 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodgetItemData">phpArmory5Cache::getItemData()</a>
+								: Provides information on a specific item by querying its' ID.
+							</li>
+				</ul>
 	</div>
 <a name="methodgetItemDataByName" id="getItemDataByName"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getItemDataByName</span> (line <span class="line-number">672</span>)
+		<span class="method-title">getItemDataByName</span> (line <span class="line-number">681</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -821,12 +837,20 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodgetItemDataByName">phpArmory5Cache::getItemDataByName()</a>
+								: Provides information on a specific item by querying its' name.
+							</li>
+				</ul>
 	</div>
 <a name="methodgetLocale" id="getLocale"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getLocale</span> (line <span class="line-number">210</span>)
+		<span class="method-title">getLocale</span> (line <span class="line-number">202</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -848,10 +872,10 @@
 			
 	</div>
 <a name="methodgetPatchLevel" id="getPatchLevel"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getPatchLevel</span> (line <span class="line-number">461</span>)
+		<span class="method-title">getPatchLevel</span> (line <span class="line-number">467</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -873,10 +897,10 @@
 			
 	</div>
 <a name="methodgetTalentData" id="getTalentData"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTalentData</span> (line <span class="line-number">492</span>)
+		<span class="method-title">getTalentData</span> (line <span class="line-number">498</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -898,10 +922,10 @@
 			
 	</div>
 <a name="methodgetXmlData" id="getXmlData"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getXmlData</span> (line <span class="line-number">251</span>)
+		<span class="method-title">getXmlData</span> (line <span class="line-number">243</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -936,10 +960,10 @@
 			
 	</div>
 <a name="methodsetArea" id="setArea"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setArea</span> (line <span class="line-number">179</span>)
+		<span class="method-title">setArea</span> (line <span class="line-number">171</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -966,10 +990,10 @@
 			
 	</div>
 <a name="methodsetLocale" id="setLocale"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">setLocale</span> (line <span class="line-number">220</span>)
+		<span class="method-title">setLocale</span> (line <span class="line-number">212</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -996,10 +1020,10 @@
 			
 	</div>
 <a name="methodtriggerError" id="triggerError"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">triggerError</span> (line <span class="line-number">436</span>)
+		<span class="method-title">triggerError</span> (line <span class="line-number">428</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1023,12 +1047,20 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodtriggerError">phpArmory5Cache::triggerError()</a>
+								: Raise a PHP error.
+							</li>
+				</ul>
 	</div>
 <a name="methodtriggerNotice" id="triggerNotice"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">triggerNotice</span> (line <span class="line-number">447</span>)
+		<span class="method-title">triggerNotice</span> (line <span class="line-number">453</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1052,6 +1084,51 @@
 				</ul>
 		
 			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodtriggerNotice">phpArmory5Cache::triggerNotice()</a>
+								: Raise a PHP notice if the class is used from the command line.
+							</li>
+				</ul>
+	</div>
+<a name="methodtriggerWarning" id="triggerWarning"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">triggerWarning</span> (line <span class="line-number">439</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Raise a PHP warning if the class is used from the command line.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			triggerWarning
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$userWarning</span> = <span class="var-default">NULL</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$userWarning</span><span class="var-description">: The warning string to output.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../phpArmory/classes/phpArmory5Cache.html#methodtriggerWarning">phpArmory5Cache::triggerWarning()</a>
+								: Raise a PHP warning if the class is used from the command line.
+							</li>
+				</ul>
 	</div>
 						
 		</div>
@@ -1059,7 +1136,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 19 Nov 2008 21:55:01 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+		Documentation generated on Thu, 20 Nov 2008 13:43:46 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
 	</p>
 	</div></body>
 </html>

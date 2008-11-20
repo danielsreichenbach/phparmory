@@ -48,8 +48,6 @@ if ( $armory = new phpArmory5($areaName = $usArea) ) {
 
         $characterIcon = $armory->getCharacterIconURL($characterData['characterinfo']['character']);
 
-        var_dump($characterIcon);
-
         $guildData = $armory->getGuildData($guildName, $guildRealmName);
     }
 } else {

@@ -154,14 +154,6 @@ class phpArmory5 {
     }
 
     /**
-     * phpArmory5 destructor.
-     * @access      public
-     */
-    public function __destruct() {
-
-    }
-
-    /**
      * Provides information on the current area configuration of phpArmory.
      * @access      public
      * @return      array       $areaSettings           Returns an array with $this->areaName, $this->armory, and $this->wow.

@@ -1,0 +1,3 @@
+This directory is used to store retrieved XML replies from the WoW
+armory. Please note that the user running the phpArmory5Cache class
+needs write access for this directory.
