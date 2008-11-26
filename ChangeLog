@@ -1,3 +1,49 @@
+# 0.4.1 - "Call to Arms" - Nov 26, 2008
+The [World of Warcraft armory](http://www.wowarmory.com/) has received quite a
+few improvements, making it feature complete with the added character data from
+the "Wrath of the Lich King" expansion.
+
+## Features added
+* getCharacterData($characterName, $realmName) will now return an array which
+  contains character achievements and statistics.
+
+        !!php
+        $character = Array
+        (
+            [characterinfo] => Array
+                (
+                        ...
+                )
+
+            [reputationtab] => Array
+                (
+                        ...
+                )
+
+            [skilltab] => Array
+                (
+                        ...
+                )
+
+            [talenttab] => Array
+                (
+                        ...
+                )
+
+            [achievements] => Array
+                (
+                        ...
+                )
+
+            [statistics] => Array
+                (
+                        ...
+                )
+
+            [armorypatchlevel] => 030003
+        )
+
+
 # 0.4.0 - “Jack-o’-Lantern” - Nov 20, 2008
 
 phpArmory has been rewritten for PHP5 and the new OOP class syntax. The class
