@@ -27,7 +27,7 @@ if ( $armory = new phpArmory5($areaName = $areaName) ) {
         $string = print_r($characterData, 1);
         $string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
 
-        echo "\$item = ".$string;
+        echo "\$character = ".$string;
     }
 } else {
     echo "Failed to create a phpArmory5 instance.\n";
