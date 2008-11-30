@@ -10,7 +10,7 @@
  * @license http://www.opensource.org/licenses/gpl-3.0.html GNU General Public License version 3
  * @link https://github.com/marenkay/phparmory/tree
  * @package phpArmory
- * @version 0.4.0
+ * @version 0.4.2
  */
 
 /**
@@ -33,7 +33,7 @@ class phpArmory5Cache extends phpArmory5 {
      * @access      protected
      * @var         string      Contains the current class version.
      */
-    protected $version = "0.4.0";
+    protected $version = "0.4.2";
 
     /**
      * Current state of the phpArmory5Cache class. Allowed values are alpha, beta,
@@ -41,7 +41,7 @@ class phpArmory5Cache extends phpArmory5 {
      * @access      protected
      * @var         string      Contains the current versions' state.
      */
-    protected $version_state = "rc-2";
+    protected $version_state = "alpha";
 
     /**
      * The current cache ID in use.

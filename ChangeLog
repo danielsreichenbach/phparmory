@@ -1,3 +1,9 @@
+# 0.4.2 - "Fishing Extravaganza" - Dec ??, 2008
+
+## Bugs squashed
+* phpArmory5Cache: the setCachedData(...) function was called without prior
+  checks if there *was* any valid data to cache. This has been fixed.
+
 # 0.4.1 - "Call to Arms" - Nov 26, 2008
 The [World of Warcraft armory](http://www.wowarmory.com/) has received quite a
 few improvements, making it feature complete with the added character data from

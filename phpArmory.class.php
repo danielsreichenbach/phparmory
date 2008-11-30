@@ -10,7 +10,7 @@
  * @license http://www.opensource.org/licenses/gpl-3.0.html GNU General Public License version 3
  * @link https://github.com/marenkay/phparmory/tree
  * @package phpArmory
- * @version 0.4.1
+ * @version 0.4.2
  */
 
 /**
@@ -28,7 +28,7 @@ class phpArmory5 {
      * @access      protected
      * @var         string      Contains the current class version.
      */
-    protected $version = "0.4.1";
+    protected $version = "0.4.2";
 
     /**
      * Current state of the phpArmory5 class. Allowed values are alpha, beta,
@@ -36,7 +36,7 @@ class phpArmory5 {
      * @access      protected
      * @var         string      Contains the current versions' state.
      */
-    protected $version_state = "release";
+    protected $version_state = "alpha";
 
     /**
      * The URL of the World of Warcraft armory website to be used.
