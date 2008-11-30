@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Armory search
+desc: phpArmory should support searching for all data types within the armory.
+type: :feature
+component: phpArmory class
+release: phpArmory 0.4.2
+reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-11-30 20:01:35.666108 Z
+references: []
+
+id: b6d95ba063cceefd4e82a129257a95a88096bd09
+log_events: 
+- - 2008-11-30 20:03:08.389362 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - created
+  - |-
+    Currently the armory can be searched for arena teams, characters, items,
+    and guilds, or for all object types.
+    Allowed object filters are "arenateams", "characters", "items", and
+    "guilds". Additionally a query for any object type may be done using a
+    filter of "all".

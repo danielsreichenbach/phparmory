@@ -1,0 +1,31 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Character statistics
+desc: |-
+  With the release of World of Warcraft:Wrath of the Lich King, the armory
+  started to show off personal statistics on per character base. phpArmory
+  should support these when querying character data.
+type: :feature
+component: phpArmory class
+release: phpArmory 0.4.1
+reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-11-30 18:57:13.135175 Z
+references: []
+
+id: 97d5a8325d17b1d85f207caca1114724a555b94a
+log_events: 
+- - 2008-11-30 18:57:51.284123 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - created
+  - |-
+    See http://eu.wowarmory.com/character-statistics.xml?r=Garrosh&n=Areshi
+    for an example of statistics data.
+- - 2008-11-30 18:58:37.858338 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2008-11-30 18:59:06.249047 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - closed with disposition fixed
+  - ""

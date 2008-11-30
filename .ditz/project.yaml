@@ -52,3 +52,29 @@ releases:
     - |-
       The big cache rewrite release. PHP data objects, and improved file based
       cache are wanted.
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: phpArmory 0.4.1
+  status: :released
+  release_time: 2008-11-26 18:53:36.694221 Z
+  log_events: 
+  - - 2008-11-26 18:52:26.746811 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - created
+    - "phpArmory 0.4.1 - \xE2\x80\x9CCall to Arms\xE2\x80\x9D will be an update release, to support the\n\
+      new features added to the World of Warcraft armory to sync it with the\n\
+      new character features introduced with the Wrath of the Lich King expansion,\n\
+      namely character achievements and statistics."
+  - - 2008-11-26 18:57:36.694237 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - released
+    - ""
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: phpArmory 0.4.2
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2008-11-30 19:53:17.008511 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - created
+    - "phpArmory 0.4.2 - \xE2\x80\x9CFishing Extravaganza\xE2\x80\x9D is a bug-fix release, and adds the\n\
+      missing search feature back into the class API."
