@@ -44,6 +44,13 @@ class phpArmory5Cache extends phpArmory5 {
     protected $version_state = "rc-2";
 
     /**
+     * The current cache ID in use.
+     * @access      protected
+     * @var         string      Contains the cache ID.
+     */
+    protected $cacheID = "";
+
+    /**
      * Selected data storage for the class. Can be "file" or "mysql".
      * @access      protected
      * @var         string      Contains the selected data storage.
@@ -279,12 +286,14 @@ class phpArmory5Cache extends phpArmory5 {
         if (!is_array($cached)) {
             $cached = parent::getArenaTeamData($arenaTeamName, $realmName);
 
-            if ( $this->cacheID ) {
+            if ( $this->cacheID && is_array($cached) ) {
 
                 $scached = serialize($cached);
                 $this->setCachedData($this->cacheID, $scached);
                 unset($this->cacheID);
 
+            } else {
+                return FALSE;
             }
 
             return $cached;
@@ -310,12 +319,14 @@ class phpArmory5Cache extends phpArmory5 {
         if (!is_array($cached)) {
             $cached = parent::getCharacterData($characterName, $realmName);
 
-            if ( $this->cacheID ) {
+            if ( $this->cacheID && is_array($cached) ) {
 
                 $scached = serialize($cached);
                 $this->setCachedData($this->cacheID, $scached);
                 unset($this->cacheID);
 
+            } else {
+                return FALSE;
             }
 
             return $cached;
@@ -341,12 +352,14 @@ class phpArmory5Cache extends phpArmory5 {
         if (!is_array($cached)) {
             $cached = parent::getGuildData($guildName, $realmName);
 
-            if ( $this->cacheID ) {
+            if ( $this->cacheID && is_array($cached) ) {
 
                 $scached = serialize($cached);
                 $this->setCachedData($this->cacheID, $scached);
                 unset($this->cacheID);
 
+            } else {
+                return FALSE;
             }
 
             return $cached;
@@ -369,12 +382,14 @@ class phpArmory5Cache extends phpArmory5 {
         if (!is_array($cached)) {
             $cached = parent::getItemData($itemID);
 
-            if ( $this->cacheID ) {
+            if ( $this->cacheID && is_array($cached) ) {
 
                 $scached = serialize($cached);
                 $this->setCachedData($this->cacheID, $scached);
                 unset($this->cacheID);
 
+            } else {
+                return FALSE;
             }
 
             return $cached;
@@ -404,12 +419,14 @@ class phpArmory5Cache extends phpArmory5 {
         if (!is_array($cached)) {
             $cached = parent::getItemDataByName($itemName, $filter);
 
-            if ( $this->cacheID ) {
+            if ( $this->cacheID && is_array($cached) ) {
 
                 $scached = serialize($cached);
                 $this->setCachedData($this->cacheID, $scached);
                 unset($this->cacheID);
 
+            } else {
+                return FALSE;
             }
 
             return $cached;
