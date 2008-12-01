@@ -406,7 +406,7 @@ class phpArmory5Cache extends phpArmory5 {
      * @param       string      $itemFilter             An associative array of search paramters.
      * @return      mixed       $result                 Returns an array containing itemData if $itemName is valid, otherwise FALSE.
      */
-    public function getItemDataByName($itemName, $filter = NULL) {
+    public function getItemDataByName($itemName, $itemFilter = NULL) {
 
         if ($filter&&is_array($filter)) {
             $this->cacheID = "s".md5($itemName.implode('', $filter));
@@ -417,7 +417,7 @@ class phpArmory5Cache extends phpArmory5 {
         $cached = $this->getCachedData($this->cacheID);
 
         if (!is_array($cached)) {
-            $cached = parent::getItemDataByName($itemName, $filter);
+            $cached = parent::getItemDataByName($itemName, $itemFilter);
 
             if ( $this->cacheID && is_array($cached) ) {
 

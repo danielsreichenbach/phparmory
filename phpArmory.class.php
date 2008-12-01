@@ -687,7 +687,7 @@ class phpArmory5 {
      * @param       string      $itemFilter             An associative array of search paramters.
      * @return      mixed       $result                 Returns an array containing itemData if $itemName is valid, otherwise FALSE.
      */
-    public function getItemDataByName($itemName, $filter = NULL) {
+    public function getItemDataByName($itemName, $itemFilter = NULL) {
 
         if (is_string($itemName)) {
             $itemURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$itemName)."&searchType=items";
@@ -712,7 +712,7 @@ class phpArmory5 {
                         } elseif (is_array($filter)) {
                             $x_item = $this->getItemData($itemID);
                             $tooltip = $x_item['itemtooltip'];
-                            foreach ($filter as $attrib => $x_filter) {
+                            foreach ($itemFilter as $attrib => $x_filter) {
                                 if ($tooltip[$attrib] != $x_filter) {
                                     unset($x_item); break;
                                 }
@@ -730,5 +730,53 @@ class phpArmory5 {
 
     }
 
+    /**
+     * Searches for any object in the armory matching given search specifications.
+     * @access      public
+     * @param       string      $type                   The type of search to perform. Valid search types are 'items', 'characters', 'guilds', 'arenateams'.
+     * @param       string      $objectName             The object name to search for.
+     * @param       string      $filter                 An associative array of search paramters.
+     * @return      mixed       $result                 Returns an array containing searchData if $objectName is valid, otherwise FALSE.
+     */
+    public function getAnyData($type = NULL, $objectName, $filter = NULL) {
+
+        if (is_string($type) && is_string($objectName)) {
+
+            switch ($type) {
+                case 'arenateams':
+                    $searchType = 'arenateams';
+                    break;
+                case 'characters':
+                    $searchType = 'characters';
+                    break;
+                case 'guilds':
+                    $searchType = 'guilds';
+                    break;
+                case 'items':
+                    $searchType = 'items';
+                    break;
+                default:
+                    $searchType = 'characters';
+                    break;
+            }
+
+            $searchURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$objectName)."&searchType=".$searchType;
+            $searchXML = $this->getXmlData($searchURL);
+
+            if (is_array($searchXML) && array_key_exists('XmlData', $searchXML)) {
+                self::triggerNotice("Searched for object \"".$objectName."\" of type [" . $searchType . "].");
+
+                $searchArray = $this->convertXmlToArray($searchXML['XmlData']);
+
+                return $searchArray;
+            } else {
+                self::triggerNotice("Searching for object \"".$objectName."\" of type [" . $searchType . "] failed.");
+                return FALSE;
+            }
+
+        } else {
+            return FALSE;
+        }
+    }
 }
 ?>

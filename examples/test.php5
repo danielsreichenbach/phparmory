@@ -49,6 +49,8 @@ if ( $armory = new phpArmory5($areaName = $usArea) ) {
         $characterIcon = $armory->getCharacterIconURL($characterData['characterinfo']['character']);
 
         $guildData = $armory->getGuildData($guildName, $guildRealmName);
+
+        $searchResults = $armory->getAnyData($type = "characters", $objectName = "dark", $filter = NULL);
     }
 } else {
     echo "Could not create an instance of phpArmory5. Please consult your PHP5 logs.\n";
