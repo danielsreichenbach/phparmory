@@ -4,6 +4,13 @@
 * phpArmory5Cache: the setCachedData(...) function was called without prior
   checks if there *was* any valid data to cache. This has been fixed.
 
+## Features added
+* phpArmory5: added getAnyData($searchType = NULL, $objectName = NULL,
+  $filter = NULL). $searchType can be any of "arenateams", "characters",
+  "guilds", "items". $filter needs to be an associative array of filter
+  properties. For now, try out the armory item search page to see valid
+  filter options.
+
 # 0.4.1 - "Call to Arms" - Nov 26, 2008
 The [World of Warcraft armory](http://www.wowarmory.com/) has received quite a
 few improvements, making it feature complete with the added character data from
