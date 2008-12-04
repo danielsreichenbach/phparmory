@@ -3,6 +3,8 @@
 ## Bugs squashed
 * phpArmory5Cache: the setCachedData(...) function was called without prior
   checks if there *was* any valid data to cache. This has been fixed.
+* phpArmory5: Strings used in URLs do not need a manual replacement of the
+  space character. urlencode() handles this for us already.
 
 ## Features added
 * phpArmory5: added getAnyData($searchType = NULL, $objectName = NULL,

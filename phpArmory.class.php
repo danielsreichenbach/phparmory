@@ -530,8 +530,6 @@ class phpArmory5 {
         if (is_string($arenaTeamName) && is_string($realmName)) {
             $realmName  = ucfirst($realmName);
 
-            $arenaTeamName  = str_replace(" ", "+",$arenaTeamName);
-            $realmName  = str_replace(" ", "+",$realmName);
             return TRUE;
         } else {
             return FALSE;
@@ -551,8 +549,6 @@ class phpArmory5 {
         if (is_string($characterName) && is_string($realmName)) {
             $characterName  = ucfirst($characterName);
             $realmName      = ucfirst($realmName);
-
-            $realmName  = str_replace(" ", "+",$realmName);
 
             $armoryBaseURL = $this->armory."character-";
             $armoryBaseURLEnd = ".xml?r=".urlencode($realmName)."&n=".urlencode($characterName);
@@ -633,9 +629,6 @@ class phpArmory5 {
             $guildName  = ucfirst($guildName);
             $realmName  = ucfirst($realmName);
 
-            $guildName  = str_replace(" ", "+",$guildName);
-            $realmName  = str_replace(" ", "+",$realmName);
-
             $armoryURL = $this->armory."guild-info.xml?r=" . urlencode($realmName) . "&n=" . urlencode($guildName);
 
             $guildXML = $this->getXmlData($armoryURL);
@@ -690,7 +683,7 @@ class phpArmory5 {
     public function getItemDataByName($itemName, $itemFilter = NULL) {
 
         if (is_string($itemName)) {
-            $itemURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$itemName)."&searchType=items";
+            $itemURL = $this->armory."search.xml?searchQuery=".urlencode($itemName)."&searchType=items";
 
             $itemsXML = $this->getXmlData($itemURL);
 
@@ -760,7 +753,7 @@ class phpArmory5 {
                     break;
             }
 
-            $searchURL = $this->armory."search.xml?searchQuery=".str_replace(" ", "+",$objectName)."&searchType=".$searchType;
+            $searchURL = $this->armory."search.xml?searchQuery=".urlencode($objectName)."&searchType=".$searchType;
             $searchXML = $this->getXmlData($searchURL);
 
             if (is_array($searchXML) && array_key_exists('XmlData', $searchXML)) {
