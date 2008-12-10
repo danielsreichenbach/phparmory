@@ -134,7 +134,7 @@ class phpArmory5 {
      */
     public function __construct($areaName = NULL, $downloadRetries = NULL) {
 
-        if (!extension_loaded('curl') && !extension_loaded('xml')) {
+        if (!extension_loaded('curl') || !extension_loaded('xml')) {
             self::triggerError("The PHP extensions \"curl\" and \"xml\" are required to use this class.");
         } else {
 
