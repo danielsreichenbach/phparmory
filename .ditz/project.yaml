@@ -70,11 +70,15 @@ releases:
     - ""
 - !ditz.rubyforge.org,2008-03-06/release 
   name: phpArmory 0.4.2
-  status: :unreleased
-  release_time: 
+  status: :released
+  release_time: 2008-12-17 14:55:50.448190 Z
   log_events: 
   - - 2008-11-30 19:53:17.008511 Z
     - Daniel S. Reichenbach <shiendra@marenkay.com>
     - created
     - "phpArmory 0.4.2 - \xE2\x80\x9CFishing Extravaganza\xE2\x80\x9D is a bug-fix release, and adds the\n\
       missing search feature back into the class API."
+  - - 2008-12-17 14:55:50.448218 Z
+    - Daniel S. Reichenbach <shiendra@marenkay.com>
+    - released
+    - phpArmory 0.4.2 - "Fishing Extravaganza" released on Dec 17th 2008

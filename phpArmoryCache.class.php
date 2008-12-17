@@ -41,7 +41,7 @@ class phpArmory5Cache extends phpArmory5 {
      * @access      protected
      * @var         string      Contains the current versions' state.
      */
-    protected $version_state = "alpha";
+    protected $version_state = "release";
 
     /**
      * The current cache ID in use.
@@ -309,15 +309,16 @@ class phpArmory5Cache extends phpArmory5 {
      * @access      public
      * @param       string      $characterName          The characters' name.
      * @param       string      $realmName              The characters' realm name.
+     * @param       bool        $onlyBasicData          If true, only the basic character data will be fetched.
      * @return      array       $result                 Returns an array containing characterData if $characterName and $realmName are valid, otherwise FALSE.
      */
-    public function getCharacterData($characterName = NULL, $realmName = NULL) {
+    public function getCharacterData($characterName = NULL, $realmName = NULL, $onlyBasicData = false) {
 
         $this->cacheID = "c".md5($characterName.$realmName);
         $cached = $this->getCachedData($this->cacheID);
 
         if (!is_array($cached)) {
-            $cached = parent::getCharacterData($characterName, $realmName);
+            $cached = parent::getCharacterData($characterName, $realmName, $onlyBasicData);
 
             if ( $this->cacheID && is_array($cached) ) {
 

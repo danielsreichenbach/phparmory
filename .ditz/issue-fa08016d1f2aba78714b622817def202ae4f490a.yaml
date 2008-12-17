@@ -1,0 +1,28 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Broken URL in armory queries
+desc: |-
+  Due to calling str_replace the armory queries for some characters failed.
+  urlencode does the job already.
+type: :bugfix
+component: phpArmory class
+release: phpArmory 0.4.2
+reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-12-17 14:53:39.526601 Z
+references: []
+
+id: fa08016d1f2aba78714b622817def202ae4f490a
+log_events: 
+- - 2008-12-17 14:53:42.095319 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - created
+  - ""
+- - 2008-12-17 14:54:20.144304 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2008-12-17 14:55:22.461005 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - closed with disposition fixed
+  - ""

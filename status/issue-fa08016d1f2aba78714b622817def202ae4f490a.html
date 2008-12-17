@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Armory search</title>
+<title>Broken URL in armory queries</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -13,12 +13,13 @@
 
 <div class="main">
 
-<h1>Armory search</h1>
+<h1>Broken URL in armory queries</h1>
 <div class="backptr"><a href="index.html">&laquo; phparmory project page</a></div>
 
 
   <div class="description">
-  <p>phpArmory should support searching for all data types within the armory.</p>
+  <p>Due to calling str_replace the armory queries for some characters failed.
+urlencode does the job already.</p>
   </div>
 
 
@@ -27,17 +28,17 @@
   <tbody>
     <tr>
       <td class="attrname">Id:</td>
-      <td class="attrval"><span class="id">b6d95ba063cceefd4e82a129257a95a88096bd09</span></td>
+      <td class="attrval"><span class="id">fa08016d1f2aba78714b622817def202ae4f490a</span></td>
     </tr>
 
     <tr>
       <td class="attrname">Type:</td>
-      <td class="attrval">feature</td>
+      <td class="attrval">bugfix</td>
     </tr>
 
     <tr>
       <td class="attrname">Creation time:</td>
-      <td class="attrval">2008-11-30 20:01 GMT</td>
+      <td class="attrval">2008-12-17 14:53 GMT</td>
     </tr>
 
     <tr>
@@ -92,34 +93,18 @@
     <tr><td></td></tr>
   
     <tr class="odd-row">
-      <td class="date">2008-12-01 20:26 GMT</td>
+      <td class="date">2008-12-17 14:54 GMT</td>
       <td class="person">Daniel S. Reichenbach &lt;shiendra@...&gt;</td>
       <td class="message">changed status from unstarted to in_progress</td>
     </tr>
     
-      <tr><td colspan="3" class="logcomment">
-      Implement function as getAnydata($searchType = NULL, $objectName = NULL,
-$filter = NULL).
-
-Note that searches for $searchType of 'all' will be returned paged, thus
-single queries for each data type have to be sent.
-      </td></tr>
-    
     <tr><td></td></tr>
   
     <tr class="even-row">
-      <td class="date">2008-11-30 20:03 GMT</td>
+      <td class="date">2008-12-17 14:53 GMT</td>
       <td class="person">Daniel S. Reichenbach &lt;shiendra@...&gt;</td>
       <td class="message">created</td>
     </tr>
-    
-      <tr><td colspan="3" class="logcomment">
-      Currently the armory can be searched for arena teams, characters, items,
-and guilds, or for all object types.
-Allowed object filters are "arenateams", "characters", "items", and
-"guilds". Additionally a query for any object type may be done using a
-filter of "all".
-      </td></tr>
     
     <tr><td></td></tr>
   

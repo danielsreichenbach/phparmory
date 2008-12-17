@@ -1,4 +1,6 @@
-# 0.4.2 - "Fishing Extravaganza" - Dec ??, 2008
+# 0.4.2 - "Fishing Extravaganza" - Dec 17, 2008
+This release should fix issues with character that could not be retrieved
+from the armory due to special characters in realm or character names.
 
 ## Bugs squashed
 * phpArmory5Cache: the setCachedData(...) function was called without prior
@@ -14,6 +16,12 @@
   "guilds", "items". $filter needs to be an associative array of filter
   properties. For now, try out the armory item search page to see valid
   filter options.
+* phpArmory5: added a third parameter to getCharacterData for retrieving only
+  the basic character data. Defaults to false. Use the following to get basic
+  character data only:
+
+        !!php
+        $character = $phpArmory->getCharacterData($characterName = "Char", $realmName = "Realm", $onlyBasicData = true)
 
 # 0.4.1 - "Call to Arms" - Nov 26, 2008
 The [World of Warcraft armory](http://www.wowarmory.com/) has received quite a

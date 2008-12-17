@@ -5,8 +5,8 @@ type: :feature
 component: phpArmory class
 release: phpArmory 0.4.2
 reporter: Daniel S. Reichenbach <shiendra@marenkay.com>
-status: :in_progress
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-11-30 20:01:35.666108 Z
 references: []
 
@@ -30,3 +30,7 @@ log_events:
     
     Note that searches for $searchType of 'all' will be returned paged, thus
     single queries for each data type have to be sent.
+- - 2008-12-17 14:55:17.316198 Z
+  - Daniel S. Reichenbach <shiendra@marenkay.com>
+  - closed with disposition fixed
+  - ""
