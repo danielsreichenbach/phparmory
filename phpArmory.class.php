@@ -124,6 +124,13 @@ class phpArmory5 {
      * @var         integer     Contains the nr# of retries to perform in case of connection failures.
      */
     protected $downloadRetries = 5;
+    
+    /**
+     * Valid character pages.
+     * @access      private
+     * @var         array       Contains the valid character pages.
+     */
+    private $characterPages = array("reputation", "skills", "talents", "achievements", "statistics");
 
     /**
      * phpArmory5 class constructor.
@@ -536,6 +543,50 @@ class phpArmory5 {
         }
 
     }
+    
+    /**
+     * Provides information from a specific page for a specific character.
+     * @access      public
+     * @param       string      $characterName
+     * @param       string      $realmName
+     * @param       string      $characterPage
+     * @return      array       $result
+     */
+    public function getCharacterPage($characterName = NULL, $realmName = NULL, $characterPage = NULL) {
+        if (in_array($characterPage, $this->characterPages)) {
+            if (is_string($characterName) && is_string($realmName)) {
+                $characterName  = ucfirst($characterName);
+                $realmName      = ucfirst($realmName);
+
+                $armoryBaseURL = $this->armory."character-";
+                $armoryBaseURLEnd = ".xml?r=".urlencode($realmName)."&n=".urlencode($characterName);
+
+                $tempXML = $this->getXmlData($armoryBaseURL . $characterPage . $armoryBaseURLEnd);
+                if (is_array($tempXML) && array_key_exists('XmlData', $tempXML)) {
+                    $characterArray = $this->convertXmlToArray($tempXML['XmlData']);
+                    
+                    if ($characterPage == "achievements" || $characterPage == "statistics") {
+                        // the new character pages use a different XML structure
+                        $characterArray['characterinfo'][$characterPage] = $characterArray[$characterPage];
+                        unset($characterArray[$characterPage]);
+                    }
+                    // remove character info from array
+                    unset($characterArray['characterinfo']['character']);
+
+                    // $string = print_r($tempArray, 1);
+                    // $string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
+                    // echo "\$tempArray['".$characterPage."'] = ".$string;
+
+                    // merge the data received from $armoryBaseURL . $characterPage . $armoryBaseURLEnd into characterArray
+                    return $characterArray['characterinfo'];
+                }
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
 
     /**
      * Provides information on a specific character.
@@ -560,29 +611,9 @@ class phpArmory5 {
                 $characterArray = $this->convertXmlToArray($characterXML['XmlData']);
 
                 if ($onlyBasicData) {
-                    $characterPages = array("reputation", "skills", "talents", "achievements", "statistics");
+                    $characterPages = $this->characterPages;
                     foreach ($characterPages as $characterPage) {
-                        $tempXML = $this->getXmlData($armoryBaseURL . $characterPage . $armoryBaseURLEnd);
-                        if (is_array($tempXML) && array_key_exists('XmlData', $tempXML)) {
-                            $tempArray = $this->convertXmlToArray($tempXML['XmlData']);
-
-                            if ($characterPage == "achievements" || $characterPage == "statistics") {
-                                // the new character pages use a different XML structure
-                                $tempArray['characterinfo'][$characterPage] = $tempArray[$characterPage];
-                                unset($tempArray[$characterPage]);
-                            }
-                            // remove character info from array
-                            unset($tempArray['characterinfo']['character']);
-
-                            // $string = print_r($tempArray, 1);
-                            // $string = str_replace(array(" ", "\n"), array("&nbsp;", "<br />\n"), $string);
-                            // echo "\$tempArray['".$characterPage."'] = ".$string;
-
-                            // merge the data received from $armoryBaseURL . $characterPage . $armoryBaseURLEnd into characterArray
-                            $characterArray = array_merge($characterArray, reset($tempArray));
-                        } else {
-                            return FALSE;
-                        }
+                        $characterArray = array_merge($characterArray, $this->getCharacterPage($characterName, $realmName, $characterPage));
                     }
                 }
 
