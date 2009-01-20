@@ -544,6 +544,36 @@ class phpArmory5 {
 
     }
     
+    public function getAchievementData($characterName = NULL, $realmName = NULL) {
+        if (is_string($characterName) && is_string($realmName)) {
+            $characterName  = ucfirst($characterName);
+            $realmName      = ucfirst($realmName);
+
+            $armoryBaseURL = $this->armory."character-achievements.xml?r=".urlencode($realmName)."&n=".urlencode($characterName)."&c=";
+            
+            $ach = $this->getCharacterPage($characterName, $realmName, 'achievements');
+            
+            if (isset($ach['achievements']['rootcategories'])) {
+                $retval = array();
+                
+                foreach ($ach['achievements']['rootcategories'] as $cats) {
+                    foreach ($cats as $cat) {
+                        if (isset($cat['id'])) {
+                            $tempXML = $this->getXmlData($armoryBaseURL . $cat['id']);
+                            if (is_array($tempXML) && array_key_exists('XmlData', $tempXML)) {
+                                $retval[$cat['name']] = $this->convertXmlToArray($tempXML['XmlData']);
+                            }
+                        }
+                    }
+                }
+                
+                return $retval;
+            }
+        }
+        
+        return FALSE;
+    }
+    
     /**
      * Provides information from a specific page for a specific character.
      * @access      public
