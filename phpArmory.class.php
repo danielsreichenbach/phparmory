@@ -544,30 +544,58 @@ class phpArmory5 {
 
     }
     
-    public function getAchievementData($characterName = NULL, $realmName = NULL) {
+    /**
+     * Provides information on all of a specific character's achievements.
+     * @access      public
+     * @param       string      $characterName          The character's name.
+     * @param       string      $realmName              The character's realm name.
+     * @param       int|string  $category               An achievement category ID or name.
+     * @return      array       $result                 Returns an array containing achievement data if $characterName and $realmName are valid, otherwise FALSE.
+     */
+    public function getAchievementData($characterName = NULL, $realmName = NULL, $category = NULL) {
         if (is_string($characterName) && is_string($realmName)) {
-            $characterName  = ucfirst($characterName);
-            $realmName      = ucfirst($realmName);
-
-            $armoryBaseURL = $this->armory."character-achievements.xml?r=".urlencode($realmName)."&n=".urlencode($characterName)."&c=";
+            if (is_string($category)) {
+                // Try to convert a category string into its integer ID
+                $category = strtolower($category);
+                $map = array(
+                    'general'           => 92,
+                    'quests'            => 96,
+                    'exploration'       => 97,
+                    'player vs. player' => 95,
+                    'dungeons & raids'  => 168,
+                    'professions'       => 169,
+                    'reputation'        => 201,
+                    'world events'      => 155,
+                    'feats of strength' => 81
+                );
+                $category = ( isset($map[$category]) ) ? $map[$category] : NULL;
+            }
             
-            $ach = $this->getCharacterPage($characterName, $realmName, 'achievements');
+            if (is_int($category)) {
+                $characterName  = ucfirst($characterName);
+                $realmName      = ucfirst($realmName);
+                $armoryBaseURL = $this->armory."character-achievements.xml?r=".urlencode($realmName)."&n=".urlencode($characterName)."&c=";
             
-            if (isset($ach['achievements']['rootcategories'])) {
-                $retval = array();
+                $tempXML = $this->getXmlData($armoryBaseURL . $category);
+                if (is_array($tempXML) && array_key_exists('XmlData', $tempXML)) {
+                    return $this->convertXmlToArray($tempXML['XmlData']);
+                }
+            } else {
+                $ach = $this->getCharacterPage($characterName, $realmName, 'achievements');
+            
+                if (isset($ach['achievements']['rootcategories'])) {
+                    $retval = array();
                 
-                foreach ($ach['achievements']['rootcategories'] as $cats) {
-                    foreach ($cats as $cat) {
-                        if (isset($cat['id'])) {
-                            $tempXML = $this->getXmlData($armoryBaseURL . $cat['id']);
-                            if (is_array($tempXML) && array_key_exists('XmlData', $tempXML)) {
-                                $retval[$cat['name']] = $this->convertXmlToArray($tempXML['XmlData']);
+                    foreach ($ach['achievements']['rootcategories'] as $cats) {
+                        foreach ($cats as $cat) {
+                            if (isset($cat['id'])) {
+                                $retval[$cat['name']] = $this->getAchievementData($characterName, $realmName, $cat['id']);
                             }
                         }
                     }
-                }
                 
-                return $retval;
+                    return $retval;
+                }
             }
         }
         
