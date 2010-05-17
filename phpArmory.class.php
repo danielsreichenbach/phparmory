@@ -701,7 +701,7 @@ class phpArmory5 {
         if (is_array($characterInfo) && array_key_exists('level', $characterInfo) && array_key_exists('genderid', $characterInfo) && array_key_exists('raceid', $characterInfo) && array_key_exists('classid', $characterInfo)) {
 
             $dir = "wow" . ($characterInfo['level'] < 60 ? "-default" : ($characterInfo['level'] < 80 ? "-70" : "-80"));
-            return $this->armory."images/portraits/$dir/{$characterInfo['genderid']}-{$characterInfo['raceid']}-{$characterInfo['classid']}.gif";
+            return $this->armory."_images/portraits/$dir/{$characterInfo['genderid']}-{$characterInfo['raceid']}-{$characterInfo['classid']}.gif";
         } else {
             return FALSE;
         }
